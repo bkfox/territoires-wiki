@@ -1,0 +1,18 @@
+{% import "macros/mediawiki.j2" as mw %}
+{% extends "components/card.j2" %}
+
+{% block classes %}
+ wiki-card-page
+{% endblock %}
+
+{% block title %}
+<div class="wiki-card-title">
+    {{ mw.parameter("title") }}
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="wiki-card-description">
+    {{ mw.parameter("description") }}
+</div>
+{% endblock %}

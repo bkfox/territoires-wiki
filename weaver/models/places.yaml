@@ -1,0 +1,26 @@
+model:
+    name: Place
+    label: Lieu
+    description: Lieu géographique, bâtiment, espace ou site identifié.
+    groups:
+        - relations
+        - geography
+        - dates
+
+    infobox:
+        groups:
+            - geography
+            - dates
+
+    properties:
+        placeType:
+            type: Text
+            enum: placeType
+            label: Type de lieu
+            description: Type du lieu.
+            required: false
+            multiple: false
+    category:
+        name: Places
+        label: Lieux
+

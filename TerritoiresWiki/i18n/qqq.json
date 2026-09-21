@@ -1,0 +1,9 @@
+{
+    "@metadata": {
+        "authors": [
+            "Territoires Wiki"
+        ]
+    },
+    "territoireswiki-desc": "Description de l’extension Territoires Wiki.",
+    "territoireswiki-data": "Libellé de l’onglet permettant d'afficher les données sémantiques de la page."
+}

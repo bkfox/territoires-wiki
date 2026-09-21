@@ -1,0 +1,26 @@
+model:
+    name: Topic
+    label: Sujet
+    description: Sujet ou thème permettant de catégoriser et relier les contenus.
+    groups:
+        - relations
+        - geography
+    properties:
+        parentTopic:
+            type: Page
+            label: Sujet parent
+            description: Sujet plus général auquel ce sujet est rattaché.
+            target: Topic
+            required: false
+            multiple: true
+
+        relatedTopic:
+            type: Page
+            label: Sujet associé
+            description: Sujet ayant une relation avec celui-ci.
+            target: Topic
+            required: false
+            multiple: true
+    category:
+        name: Topics
+        label: Sujets

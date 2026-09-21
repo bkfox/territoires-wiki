@@ -1,0 +1,17 @@
+model:
+    name: Person
+    label: Personne
+    description: Personne physique.
+    groups:
+        - relations
+        - geography
+        - dates
+        - people
+        - content
+    infobox:
+        groups:
+            - geography
+            - relations
+    category:
+        name: People
+        label: Personnes

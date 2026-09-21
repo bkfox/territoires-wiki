@@ -1,0 +1,30 @@
+{
+    "name": "TerritoiresWiki",
+    "version": "0.1.0",
+    "author": [
+        "Territoires Wiki"
+    ],
+    "descriptionmsg": "territoireswiki-desc",
+    "license-name": "GPL-2.0-or-later",
+    "type": "other",
+
+    "AutoloadNamespaces": {
+        "MediaWiki\\Extension\\TerritoiresWiki\\": "src/"
+    },
+
+    "Hooks": {
+        "SkinTemplateNavigation::Universal": "MediaWiki\\Extension\\TerritoiresWiki\\Hooks::onSkinTemplateNavigationUniversal"
+    },
+
+    "MessagesDirs": {
+        "TerritoiresWiki": [
+            "i18n"
+        ]
+    },
+
+    "requires": {
+        "MediaWiki": ">= 1.46.0"
+    },
+
+    "manifest_version": 2
+}

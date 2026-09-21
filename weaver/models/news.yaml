@@ -1,0 +1,24 @@
+model:
+    name: News
+    label: Actualité
+    description: Publication rapportant une actualité ou une information récente.
+    groups:
+        - relations
+        - geography
+        - dates
+        - content
+    infobox:
+        groups:
+            - dates
+            - geography
+    properties:
+        publicationStatus:
+            type: Text
+            enum: publicationStatus
+            label: Statut de publication
+            description: Statut de publication de l'actualité.
+            required: false
+            multiple: false
+    category:
+        name: News
+        label: Actualités

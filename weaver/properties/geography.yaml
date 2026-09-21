@@ -1,0 +1,64 @@
+groups:
+    geography:
+        label: Géographie
+        properties:
+            - coordinates
+            - geometry
+            - address
+            - country
+            - parentPlace
+            - parentTerritory
+            - includedTerritory
+
+properties:
+    coordinates:
+        type: Geographic coordinate
+        label: Coordonnées
+        description: Coordonnées géographiques ponctuelles de l'élément.
+        required: false
+        multiple: false
+
+    geometry:
+        type: Text
+        label: Géométrie
+        description: Géométrie géographique de l'élément, notamment pour les lignes et les polygones.
+        required: false
+        multiple: false
+
+    address:
+        type: Text
+        label: Adresse
+        description: Adresse postale ou localisation textuelle.
+        required: false
+        multiple: false
+
+    country:
+        type: Page
+        label: Pays
+        description: Pays
+        required: false
+        multiple: false
+
+    parentPlace:
+        type: Page
+        label: Lieu parent
+        description: Lieu dans lequel ce lieu est situé ou dont il constitue une partie.
+        target: Place
+        required: false
+        multiple: false
+
+    parentTerritory:
+        type: Page
+        label: Territoire parent
+        description: Territoire ou ensemble territorial auquel ce territoire appartient.
+        target: Territory
+        required: false
+        multiple: true
+
+    includedTerritory:
+        type: Page
+        label: Territoire inclus
+        description: Territoires inclus dans ce territoire.
+        target: Territory
+        required: false
+        multiple: true

@@ -1,0 +1,157 @@
+:root {
+    --color-green-0: #354b45;
+    --color-green-1: #5c9d8b;
+    --color-green-2: #00c9a7;
+    --color-green-3: #e5fff7;
+    --color-green-4: #e5fff7;
+
+    --color-primary: var(--color-green-2);
+    --color-secondary: var(--color-green-3);
+
+    --sheet-bg: var(--color-green-4);
+    --border-color: var(--color-green-2);
+
+    --p1: 0.25rem;
+    --p2: 0.5rem;
+    --p3: 0.75rem;
+    --p4: 1rem
+}
+
+
+/* Infobox */
+.infobox {
+    border: 1px solid #a2a9b1;
+    border-spacing: 3px;
+    background-color: #f8f9fa;
+    color: #202122;
+    margin: 0.5em 0 0.5em 1em;
+    padding: 0.2em;
+    float: right;
+    clear: right;
+    font-size: 88%;
+    line-height: 1.5em;
+    width: 290px;
+}
+
+    .infobox > *:first-child { margin-top: 0rem; }
+
+.infobox th { text-align: left; vertical-align: top; }
+.infobox td { vertical-align: top; } 
+.infobox > tbody > tr:first-child > th {
+    text-align: center;
+    font-size: 125%;
+}
+
+.infobox .map {
+    width: 100%;
+}
+
+
+/* ---- Components ---- */
+/*** Cards ***/
+.wiki-card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.wiki-card-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.wiki-card {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px var(--border-color) solid;
+    border-radius: 0.2rem;
+    background-color: var(--sheet-bg);;
+    overflow: hidden;
+    padding: 1rem;
+}
+
+    .wiki-card > *:first-child { margin-top: 0rem; }
+
+    .wiki-card-body { }
+
+    .wiki-card-title,
+    .wiki-list-item-title {
+        font-size: 1.1em;
+        font-weight: 600;
+    }
+
+        h2.wiki-card-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+
+    .wiki-card-meta,
+    .wiki-card-date,
+    .wiki-list-item-meta {
+        margin-top: 0.35rem;
+        color: #54595d;
+        font-size: 0.9em;
+    }
+
+    .wiki-card-content,
+    .wiki-list-item-content {
+        margin-top: 0.75rem;
+    }
+
+    .wiki-location-map {
+        width: 100%;
+    }
+
+    .wiki-address {
+        margin-top: 0.75rem;
+    }
+
+/*** Lists ***/
+.wiki-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.wiki-list-item {
+    min-width: 0;
+    padding: 0.5rem 0;
+}
+
+    .wiki-list-item-excerpt {
+        margin-top: 0.5rem;
+        color: #54595d;
+    }
+
+
+/*** Properties ***/
+.wiki-property {
+    display: grid;
+    grid-template-columns: minmax(8rem, 35%) 1fr;
+    gap: 0.5rem;
+    padding: 0.35rem 0;
+}
+
+.wiki-property-label {
+    font-weight: 600;
+}
+
+@media (max-width: 700px) {
+    .wiki-list {
+        grid-template-columns: 1fr;
+    }
+
+    .wiki-property {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 700px) {
+    .wiki-card-grid {
+        grid-template-columns: 1fr;
+    }
+}

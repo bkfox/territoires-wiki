@@ -1,0 +1,59 @@
+groups:
+    content:
+        label: Contenu
+        properties:
+            - title
+            - author
+            - publisher
+            - website
+            - identifier
+            - isbn
+
+properties:
+    title:
+        type: Text
+        label: Titre
+        description: Titre du contenu.
+        required: false
+        multiple: false
+
+    author:
+        type: Page
+        label: Auteur
+        description: Personne ou organisation ayant produit le contenu.
+        target:
+            - Person
+            - Organization
+        required: false
+        multiple: true
+
+    publisher:
+        type: Page
+        label: Éditeur
+        description: Personne ou organisation ayant publié le contenu.
+        target:
+            - Organization
+            - Person
+        required: false
+        multiple: true
+
+    website:
+        type: URL
+        label: Site web
+        description: Adresse d'un site web associé.
+        required: false
+        multiple: true
+
+    identifier:
+        type: Text
+        label: Identifiant
+        description: Identifiant externe du contenu.
+        required: false
+        multiple: true
+
+    isbn:
+        type: Text
+        label: ISBN
+        description: Numéro ISBN du contenu.
+        required: false
+        multiple: true

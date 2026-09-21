@@ -1,0 +1,38 @@
+groups:
+    people:
+        label: Personne
+        properties:
+            - firstName
+            - lastName
+            # - image
+            - occupation
+
+properties:
+    firstName:
+        type: Text
+        label: Prénom
+        description: Prénom de la personne.
+        required: false
+        multiple: false
+
+    lastName:
+        type: Text
+        label: Nom de famille
+        description: Nom de famille de la personne.
+        required: false
+        multiple: false
+
+#    image:
+#        type: Page
+#        label: Image
+#        description: Fichier image représentant l'élément.
+#        target: File
+#        required: false
+#        multiple: false
+
+    occupation:
+        type: Text
+        label: Profession
+        description: Profession ou activité principale de la personne.
+        required: false
+        multiple: true

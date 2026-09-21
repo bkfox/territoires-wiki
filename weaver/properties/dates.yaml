@@ -1,0 +1,53 @@
+groups:
+    dates:
+        label: Dates
+        properties:
+            - date
+            - dateStart
+            - dateEnd
+            - datePublished
+            - dateFounded
+            - dateDissolved
+
+properties:
+    date:
+        type: Date
+        label: Date
+        description: Date associée à l'élément.
+        required: false
+        multiple: false
+
+    dateStart:
+        type: Date
+        label: Date de début
+        description: Date de début d'une période ou d'un événement.
+        required: false
+        multiple: false
+
+    dateEnd:
+        type: Date
+        label: Date de fin
+        description: Date de fin d'une période ou d'un événement.
+        required: false
+        multiple: false
+
+    datePublished:
+        type: Date
+        label: Date de publication
+        description: Date à laquelle le contenu ou l'information a été publié.
+        required: false
+        multiple: false
+
+    dateFounded:
+        type: Date
+        label: Date de création
+        description: Date de création ou de fondation.
+        required: false
+        multiple: false
+
+    dateDissolved:
+        type: Date
+        label: Date de dissolution
+        description: Date de dissolution, de disparition ou de fin d'existence.
+        required: false
+        multiple: false

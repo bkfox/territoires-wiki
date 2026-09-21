@@ -1,0 +1,23 @@
+model:
+    name: Territory
+    label: Territoire
+    description: Territoire géographique, administratif, naturel, social...
+    groups:
+        - relations
+        - geography
+        - dates
+    infobox:
+        groups:
+        - geography
+        
+    properties:
+        territoryType:
+            type: Text
+            enum: territoryType
+            label: Type de territoire
+            description: Type du territoire.
+            required: false
+            multiple: false
+    category:
+        name: Territories
+        label: Territoires

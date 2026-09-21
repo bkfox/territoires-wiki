@@ -1,0 +1,20 @@
+model:
+    name: Article
+    label: Article
+    description: Article de connaissance, d'analyse, de guide ou de documentation.
+    groups:
+        - relations
+        - geography
+        - dates
+        - content
+    properties:
+        articleType:
+            type: Text
+            enum: articleType
+            label: Type d'article
+            description: Type de l'article.
+            required: false
+            multiple: false
+    category:
+        name: Articles
+        label: Articles

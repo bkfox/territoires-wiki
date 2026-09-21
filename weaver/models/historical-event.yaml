@@ -1,0 +1,33 @@
+model:
+    name: HistoricalEvent
+    label: Événement historique
+    description: Événement historique documenté.
+    groups:
+        - relations
+        - geography
+        - dates
+        - content
+    infobox:
+        groups:
+            - identification
+            - dates
+            - geography
+    properties:
+        historicalEventType:
+            type: Text
+            enum: historicalEventType
+            label: Type d'événement historique
+            description: Type de l'événement historique.
+            required: false
+            multiple: false
+
+        relatedHistoricalEvent:
+            type: Page
+            label: Événement historique associé
+            description: Événement historique ayant une relation avec celui-ci.
+            target: HistoricalEvent
+            required: false
+            multiple: true
+    category:
+        name: HistoricalEvents
+        label: Événements historiques

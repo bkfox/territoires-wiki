@@ -1,0 +1,54 @@
+{% macro parameter(name) -%}
+{{ '{{{' }}{{ name }}|}}}
+{%- endmacro %}
+
+{% macro set_property(name) -%}
+{{ '{{#set:' }}{{ name }}={{ parameter(name) }}{{ '}}' }}
+{%- endmacro %}
+
+
+{% macro display_map(name) -%}
+{% set parameter = '{{{' ~ name ~ '|}}}' %}
+{{ '{{#if:' ~ parameter ~ '|{{#display_map:' ~ parameter ~ '|height=200px|width=290px|zoom=13}}}}' }}
+{%- endmacro %}
+
+<noinclude>
+{{ '{{' }}Documentation
+ | content =
+Template pour les pages de type **{{ model.label }}**.
+}}
+</noinclude><includeonly>
+
+{| class="infobox noexcerpt"
+
+{% if "name" in properties %}
+! colspan="2" | {{ parameter("name") }}
+{% endif %}
+
+{% if "coordinates" in properties %}
+|-
+! colspan="2" class="infobox-map" |
+{{ display_map("coordinates") }}
+{%- endif %}
+
+{% for group in infobox %}
+{% for property in group.properties %}
+{% if property.name not in ("name", "coordinates") -%}
+|-
+! {{ property.label }}
+| {{ parameter(property.name) }}
+{% endif %}
+{% endfor %}
+{% endfor %}
+
+|}
+
+{% for property in properties.values() %}
+{{ set_property(property.name) }}
+{% endfor %}
+
+{{ '{{#if:' }}{{ parameter("description") }}|{{ parameter("description") }}{{ '}}' }}
+
+[[Category:{{ model.category.name }}]]
+
+</includeonly>

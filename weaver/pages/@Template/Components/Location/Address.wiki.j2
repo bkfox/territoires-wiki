@@ -1,0 +1,13 @@
+{% import "macros/mediawiki.j2" as mw %}
+
+<div class="wiki-address">
+{% if true %}
+<div class="wiki-address-street">
+    {{ mw.parameter("address") }}
+</div>
+{% endif %}
+
+<div class="wiki-address-place">
+    {{ mw.parameter("place") }}
+</div>
+</div>

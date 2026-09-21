@@ -1,0 +1,10 @@
+[[Has type::{{ property.type }}]]
+[[Has preferred property label::{{ property.label }}@fr]]
+{% if property.description %}
+[[Has property description::{{ property.description }}@fr]]
+{% endif %}
+{% if enumeration %}
+{% for key, value in enumeration.values.items() %}
+[[Allows value::{{ key }}]]
+{% endfor %}
+{% endif %}

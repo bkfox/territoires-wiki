@@ -1,0 +1,49 @@
+model:
+    name: Event
+    label: Événement
+    description: Événement ponctuel ou organisé.
+    groups:
+        - relations
+        - geography
+        - dates
+        - content
+    infobox:
+        groups:
+            - dates
+            - geography
+    properties:
+        eventType:
+            type: Text
+            enum: eventType
+            label: Type d'événement
+            description: Type de l'événement.
+            required: false
+            multiple: false
+
+        organizer:
+            type: Page
+            label: Organisateur
+            description: Personne ou organisation organisant l'événement.
+            target:
+                - Person
+                - Organization
+            required: false
+            multiple: true
+
+        registrationUrl:
+            type: URL
+            label: Adresse d'inscription
+            description: Adresse permettant de s'inscrire à l'événement.
+            required: false
+            multiple: true
+
+        status:
+            type: Text
+            enum: eventStatus
+            label: Statut
+            description: Statut de l'événement.
+            required: false
+            multiple: false
+    category:
+        name: Events
+        label: Événements

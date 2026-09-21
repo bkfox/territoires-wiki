@@ -1,0 +1,90 @@
+<strong>Territoires.wiki est un site qui traite des territoires, de leurs habitants et de leurs histoires.</strong>
+
+<p>Explorez, rencontrez, c'est à vous de jouer!</p>
+
+
+<div class="wiki-card-grid noexcerpt">
+
+    <div class="wiki-card">
+        <h2 class="wiki-card-title">Actualités</h2>
+        {{Components/List|
+        {{#ask:
+            [[Category:Articles]]
+            |?description
+            |?datePublished
+            |limit=6
+            |sort=datePublished
+            |order=descending
+            |format=template
+            |template=Component/ListItem/Article
+        }}
+        }}
+    </div>
+
+    <div class="wiki-card">
+        <h2 class="wiki-card-title">Événements</h2>
+        {{Components/List
+        {{#ask:
+            [[Category:Events]]
+            [[dateStart::+]]
+            |?=page
+            |?dateStart
+            |?dateEnd
+            |?place
+            |?territory
+            |?eventType
+            |sort=dateStart
+            |order=ascending
+            |limit=6
+            |format=template
+            |template=Components/Card/Event
+            |named args=yes
+        }}
+        }}
+    </div>
+
+    <div class="wiki-card">
+        <h2 class="wiki-card-title">Territoires</h2>
+        {{#dpl:
+            namespace=main
+            |ordermethod=created
+            |order=descending
+            |count=6
+            |include=*
+            |includemaxlength=300
+            |includetrim=true
+            |eliminate=categories
+            |mode=userformat
+            |listseparators=
+            <div class="wiki-card-list">,
+                <div class="wiki-list-item">
+                <div class="wiki-list-item-title">[[%PAGE%|%TITLE%]]</div>
+                ,
+                </div>
+            </div>
+            |secseparators=
+                <div class="wiki-list-item-excerpt">,
+            </div>
+        }}
+    </div>
+
+    <div class="wiki-card">
+        <h2 class="wiki-card-title">Catégories</h2>
+        {{#dpl:
+            namespace=Category
+            |mode=none
+            |shownamespace=false
+            |ordermethod=title
+            |order=ascending
+        }}
+    </div>
+</div>
+
+
+== Pour démarrer ==
+* [https://www.mediawiki.org/wiki/Special:MyLanguage/Manual:Configuration_settings Liste des paramètres de configuration]
+* [https://www.mediawiki.org/wiki/Special:MyLanguage/Manual:FAQ Questions courantes sur MediaWiki]
+* [https://lists.wikimedia.org/postorius/lists/mediawiki-announce.lists.wikimedia.org/ Liste de discussion sur les distributions de MediaWiki]
+* [https://www.mediawiki.org/wiki/Special:MyLanguage/Localisation#Translation_resources Adaptez MediaWiki dans votre langue]
+* [https://www.mediawiki.org/wiki/Special:MyLanguage/Manual:Combating_spam Apprendre comment combattre le pourriel dans votre wiki]
+

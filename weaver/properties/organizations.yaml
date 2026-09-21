@@ -1,0 +1,43 @@
+groups:
+    organizations:
+        label: Organisation
+        properties:
+            - legalStatus
+            - parentOrganization
+            - member
+            - sector
+
+properties:
+    legalStatus:
+        type: Text
+        enum: legalStatus
+        label: Statut juridique
+        description: Statut juridique de l'organisation.
+        required: false
+        multiple: false
+
+    parentOrganization:
+        type: Page
+        label: Organisation parente
+        description: Organisation dont cette organisation dépend ou fait partie.
+        target: Organization
+        required: false
+        multiple: false
+
+    member:
+        type: Page
+        label: Membre
+        description: Personne ou organisation membre.
+        target:
+            - Person
+            - Organization
+        required: false
+        multiple: true
+
+    sector:
+        type: Page
+        label: Secteur
+        description: Secteur d'activité ou domaine de l'organisation.
+        target: Topic
+        required: false
+        multiple: true

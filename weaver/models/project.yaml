@@ -1,0 +1,77 @@
+model:
+    name: Project
+    label: Projet
+    description: Projet ou initiative collective.
+    groups:
+        - relations
+        - geography
+        - dates
+        - content
+            
+    infobox:
+        groups:
+            - geography
+            - dates
+
+    properties:
+        projectType:
+            type: Text
+            enum: projectType
+            label: Type de projet
+            description: Type du projet.
+            required: false
+            multiple: false
+
+        status:
+            type: Text
+            enum: projectStatus
+            label: Statut
+            description: Statut actuel du projet.
+            required: false
+            multiple: false
+
+        leadOrganization:
+            type: Page
+            label: Organisation porteuse
+            description: Organisation responsable ou porteuse du projet.
+            target: Organization
+            required: false
+            multiple: false
+
+        leadPerson:
+            type: Page
+            label: Personne porteuse
+            description: Personne responsable ou porteuse du projet.
+            target: Person
+            required: false
+            multiple: false
+
+        participant:
+            type: Page
+            label: Participant
+            description: Personne ou organisation participant au projet.
+            target:
+                - Person
+                - Organization
+            required: false
+            multiple: true
+
+        parentProject:
+            type: Page
+            label: Projet parent
+            description: Projet dont celui-ci constitue une composante.
+            target: Project
+            required: false
+            multiple: false
+
+        relatedProject:
+            type: Page
+            label: Projet associé
+            description: Projet ayant une relation avec celui-ci.
+            target: Project
+            required: false
+            multiple: true
+
+    category:
+        name: Projects
+        label: Projets

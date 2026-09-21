@@ -1,0 +1,25 @@
+model:
+    name: Organization
+    label: Organisation
+    description: Organisation, entreprise, association, institution ou collectif.
+    groups:
+        - relations
+        - geography
+        - dates
+        - organizations
+        - content
+    infobox:
+        groups:
+        - geography
+        - organizations
+    properties:
+        organizationType:
+            type: Text
+            enum: organizationType
+            label: Type d'organisation
+            description: Type de l'organisation.
+            required: false
+            multiple: false
+    category:
+        name: Organizations
+        label: Organisations

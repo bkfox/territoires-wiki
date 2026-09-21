@@ -1,0 +1,76 @@
+groups:
+    relations:
+        label: Relations
+        properties:
+            - topic
+            - place
+            - territory
+            - person
+            - organization
+            - project
+            - event
+            - source
+properties:
+    topic:
+        type: Page
+        label: Sujet
+        description: Sujet ou thème associé à l'élément.
+        target: Topic
+        required: false
+        multiple: true
+
+    place:
+        type: Page
+        label: Lieu
+        description: Lieu associé à l'élément.
+        target: Place
+        required: false
+        multiple: true
+
+    territory:
+        type: Page
+        label: Territoire
+        description: Territoire associé à l'élément.
+        target: Territory
+        required: false
+        multiple: true
+
+    person:
+        type: Page
+        label: Personne
+        description: Personne associée à l'élément.
+        target: Person
+        required: false
+        multiple: true
+
+    organization:
+        type: Page
+        label: Organisation
+        description: Organisation associée à l'élément.
+        target: Organization
+        required: false
+        multiple: true
+
+    project:
+        type: Page
+        label: Projet
+        description: Projet associé à l'élément.
+        target: Project
+        required: false
+        multiple: true
+
+    event:
+        type: Page
+        label: Événement
+        description: Événement associé à l'élément.
+        target: Event
+        required: false
+        multiple: true
+
+    source:
+        type: Page
+        label: Source
+        description: Source documentaire associée à l'élément.
+        target: Source
+        required: false
+        multiple: true

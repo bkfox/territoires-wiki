@@ -1,0 +1,15 @@
+{% macro parameter(name) -%}
+{{ '{{{' ~ name ~ '|}}}' }}
+{%- endmacro %}
+
+{% macro named_parameter(name) -%}
+{{ '{{{' ~ name ~ '|}}}' }}
+{%- endmacro %}
+
+{% macro set(name, value) -%}
+{{ '{{#set:' ~ name ~ '=' ~ value ~ '}}' }}
+{%- endmacro %}
+
+{% macro display_map(name, height="200px", width="100%", zoom="13") -%}
+{{ '{{#display_map:' ~ parameter(name) ~ '|height=' ~ height ~ '|width=' ~ width ~ '|zoom=' ~ zoom ~ '}}' }}
+{%- endmacro %}

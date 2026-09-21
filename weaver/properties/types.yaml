@@ -1,0 +1,292 @@
+enums:
+    placeType:
+        label: Type de lieu
+        values:
+            village:
+                label: Village
+            neighborhood:
+                label: Quartier
+            city:
+                label: Ville
+            town:
+                label: Bourg
+            hamlet:
+                label: Hameau
+            building:
+                label: Bâtiment
+            farm:
+                label: Ferme
+            forest:
+                label: Forêt
+            river:
+                label: Rivière
+            lake:
+                label: Lac
+            naturalArea:
+                label: Espace naturel
+            industrialArea:
+                label: Zone industrielle
+            brownfield:
+                label: Friche
+            publicSpace:
+                label: Espace public
+            thirdPlace:
+                label: Tiers-lieu
+            infrastructure:
+                label: Infrastructure
+            other:
+                label: Autre
+
+    territoryType:
+        label: Type de territoire
+        values:
+            administrative:
+                label: Administratif
+            geographic:
+                label: Géographique
+            ecological:
+                label: Écologique
+            historical:
+                label: Historique
+            cultural:
+                label: Culturel
+            political:
+                label: Politique
+            territorialProject:
+                label: Projet de territoire
+            other:
+                label: Autre
+
+    organizationType:
+        label: Type d'organisation
+        values:
+            association:
+                label: Association
+            company:
+                label: Entreprise
+            cooperative:
+                label: Coopérative
+            publicInstitution:
+                label: Institution publique
+            localAuthority:
+                label: Collectivité
+            informalCollective:
+                label: Collectif informel
+            media:
+                label: Média
+            researchInstitution:
+                label: Organisme de recherche
+            educationalInstitution:
+                label: Établissement d'enseignement
+            politicalOrganization:
+                label: Organisation politique
+            union:
+                label: Syndicat
+            foundation:
+                label: Fondation
+            religiousOrganization:
+                label: Organisation religieuse
+            other:
+                label: Autre
+
+    projectType:
+        label: Type de projet
+        values:
+            ecological:
+                label: Écologique
+            agricultural:
+                label: Agricole
+            economic:
+                label: Économique
+            cultural:
+                label: Culturel
+            social:
+                label: Social
+            political:
+                label: Politique
+            territorial:
+                label: Territorial
+            housing:
+                label: Habitat
+            educational:
+                label: Éducatif
+            research:
+                label: Recherche
+            infrastructure:
+                label: Infrastructure
+            other:
+                label: Autre
+
+    projectStatus:
+        label: Statut du projet
+        values:
+            idea:
+                label: Idée
+            preparation:
+                label: En préparation
+            active:
+                label: En cours
+            suspended:
+                label: Suspendu
+            completed:
+                label: Terminé
+            abandoned:
+                label: Abandonné
+
+    eventType:
+        label: Type d'événement
+        values:
+            meeting:
+                label: Réunion
+            conference:
+                label: Conférence
+            workshop:
+                label: Atelier
+            training:
+                label: Formation
+            demonstration:
+                label: Manifestation
+            festival:
+                label: Festival
+            exhibition:
+                label: Exposition
+            market:
+                label: Marché
+            concert:
+                label: Concert
+            screening:
+                label: Projection
+            debate:
+                label: Débat
+            tour:
+                label: Visite
+            other:
+                label: Autre
+
+    eventStatus:
+        label: Statut de l'événement
+        values:
+            planned:
+                label: Prévu
+            confirmed:
+                label: Confirmé
+            postponed:
+                label: Reporté
+            cancelled:
+                label: Annulé
+            completed:
+                label: Terminé
+
+    publicationStatus:
+        label: Statut de publication
+        values:
+            draft:
+                label: Brouillon
+            published:
+                label: Publié
+            archived:
+                label: Archivé
+
+    articleType:
+        label: Type d'article
+        values:
+            place:
+                label: Lieu
+            territory:
+                label: Territoire
+            organization:
+                label: Organisation
+            person:
+                label: Personne
+            project:
+                label: Projet
+            history:
+                label: Histoire
+            theme:
+                label: Thématique
+            concept:
+                label: Concept
+            issue:
+                label: Enjeu
+            practice:
+                label: Pratique
+            other:
+                label: Autre
+
+    historicalEventType:
+        label: Type d'événement historique
+        values:
+            political:
+                label: Politique
+            social:
+                label: Social
+            economic:
+                label: Économique
+            military:
+                label: Militaire
+            cultural:
+                label: Culturel
+            environmental:
+                label: Environnemental
+            scientific:
+                label: Scientifique
+            religious:
+                label: Religieux
+            technological:
+                label: Technologique
+            other:
+                label: Autre
+
+    sourceType:
+        label: Type de source
+        values:
+            website:
+                label: Site web
+            pressArticle:
+                label: Article de presse
+            book:
+                label: Livre
+            report:
+                label: Rapport
+            study:
+                label: Étude
+            academicPaper:
+                label: Article scientifique
+            administrativeDocument:
+                label: Document administratif
+            archivalDocument:
+                label: Document d'archive
+            interview:
+                label: Entretien
+            video:
+                label: Vidéo
+            audio:
+                label: Audio
+            photograph:
+                label: Photographie
+            map:
+                label: Carte
+            dataset:
+                label: Jeu de données
+            other:
+                label: Autre
+
+    legalStatus:
+        label: Statut juridique
+        values:
+            association:
+                label: Association
+            cooperative:
+                label: Coopérative
+            company:
+                label: Entreprise
+            publicInstitution:
+                label: Institution publique
+            localAuthority:
+                label: Collectivité
+            foundation:
+                label: Fondation
+            informalCollective:
+                label: Collectif informel
+            other:
+                label: Autre

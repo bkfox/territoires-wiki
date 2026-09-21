@@ -1,0 +1,35 @@
+{% macro field(property) -%}
+{{ '{{{' }}field|{{ property.name }}|label={{ property.label }}{% if property.enumeration %}|input type=dropdown|values={% for key, value in property.enumeration.values.items() %}{{ key }}={{ value.label }}{% if not loop.last %};{% endif %}{% endfor %}{% elif property.property.type == "Page" %}|input type=combobox{% if property.target_category %}|values from category={{ property.target_category }}{% endif %}{% endif %}{% if property.property.required %}|mandatory{% endif %}{% if property.property.multiple %}|list{% endif %}{{ '}}}' }}
+{%- endmacro %}
+
+<noinclude>
+Ceci est le formulaire « {{ model.label }} »{% if model.description %}({{ model.description }}){% endif %}.
+
+Pour créer une page avec ce formulaire, entrez le nom de la page ci-dessous ;
+si une page existe déjà sous ce nom, vous serez dirigé vers un formulaire pour la modifier.
+{{ '{{#forminput:form=' }}{{ model.name }}{{ '}}' }}
+
+</noinclude><includeonly>
+<div id="wikiPreview" style="display: none; padding-bottom: 25px; margin-bottom: 25px; border-bottom: 1px solid #AAAAAA;"></div>
+
+{{ '{{{for template|' }}{{ model.name }}{{ '}}}' }}
+
+{% for group in groups %}
+
+{% if group.label %}
+=== {{ group.label }} ===
+{% endif %}
+
+{| class="formtable"
+{% for property in group.properties %}
+|-
+! {{ property.label }}:
+| {{ field(property) }}
+{% endfor %}
+|}
+
+{% endfor %}
+
+{{ '{{{end template}}}' }}
+
+</includeonly>

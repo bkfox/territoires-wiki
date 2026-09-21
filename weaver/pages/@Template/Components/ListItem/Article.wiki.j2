@@ -1,0 +1,20 @@
+{% import "macros/mediawiki.j2" as mw %}
+{% extends "components/list_item.j2" %}
+
+{% block classes %}
+ wiki-list-item-article
+{% endblock %}
+
+{% block title %}
+{{ mw.parameter("title") }}
+{% endblock %}
+
+{% block meta %}
+{{ mw.parameter("datePublished") }}
+{% endblock %}
+
+{% block content %}
+<div class="wiki-list-item-excerpt">
+    {{ mw.parameter("excerpt") }}
+</div>
+{% endblock %}

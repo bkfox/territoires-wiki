@@ -1,0 +1,14 @@
+{% import "macros/mediawiki.j2" as mw %}
+{% extends "components/list_item.j2" %}
+
+{% block title %}
+{{ mw.parameter("title") }}
+{% endblock %}
+
+{% block meta %}
+{{ mw.parameter("datePublished") }}
+{% endblock %}
+
+{% block content %}
+{{ mw.parameter("description") }}
+{% endblock %}

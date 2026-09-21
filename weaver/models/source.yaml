@@ -1,0 +1,21 @@
+model:
+    name: Source
+    label: Source
+    description: Source documentaire utilisée pour documenter une information.
+    groups:
+        - dates
+        - content
+    infobox:
+        groups:
+            - dates
+    properties:
+        sourceType:
+            type: Text
+            enum: sourceType
+            label: Type de source
+            description: Type de la source documentaire.
+            required: false
+            multiple: false
+    category:
+        name: Sources
+        label: Sources
