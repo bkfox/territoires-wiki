@@ -1,0 +1,42 @@
+{
+  "name": "TerritoiresWikiSkin",
+  "author": "Thomas",
+  "description": "Territoires.wiki skin",
+  "manifest_version": 2,
+  "ValidSkinNames": {
+    "territoireswikiskin": {
+        "class": "SkinTerritoiresWiki",
+        "args": [{
+            "name": "TerritoiresWikiSkin",
+            "templateDirectory": "templates"
+        }]
+    }
+  },
+  "AutoloadClasses": {
+    "SkinTerritoiresWiki": "includes/SkinTerritoiresWiki.php"
+  },
+  "ResourceModules": {
+    "skins.territoireswiki.assets": {
+      "localBasePath": "",
+      "remoteSkinPath": "TerritoiresWikiSkin",
+      "scripts": [
+        "assets/index.js"
+      ],
+      "styles": [
+        "assets/index.css"
+      ],
+      "dependencies": [
+        "mediawiki.api",
+        "mediawiki.util",
+        "mediawiki.jqueryMsg"
+      ],
+      "targets": [ "desktop", "mobile" ]
+    }
+  },
+  "ResourceModuleSkinStyles": {
+    "territoireswiki": {
+      "skins.territoireswiki.assets": []
+    }
+  }
+}
+
