@@ -37,6 +37,13 @@
     "territoireswiki": {
       "skins.territoireswiki.assets": []
     }
+  },
+  "VisualEditorSkinConfig": {
+    "territoireswiki": {
+      "mw-content-container": "#content",
+      "mw-body-content": "#bodyContent",
+      "mw-first-heading": "#firstHeading"
+    }
   }
 }
 

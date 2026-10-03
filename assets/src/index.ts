@@ -1,4 +1,4 @@
-import { createApp } from 'vue';
+import { createApp, h, ref } from 'vue';
 import { createVuetify } from 'vuetify';
 
 import 'vuetify/styles';
@@ -8,8 +8,10 @@ import colors from 'vuetify/util/colors'
 import './index.scss';
 
 import App from './components/App.vue';
+import {initWidgets} from './widgets';
 
-window.mw.loader.using(['mediawiki.api', 'mediawiki.util'], function () {
+
+window.mw.loader.using(['mediawiki.api', 'mediawiki.util', 'ext.maps.leaflet.library'], function () {
 
     // Script déclenché à chaque chargement ou modification du contenu du wiki (Hook natif)
     /*mw.hook('wikipage.content').add(function (content) {
@@ -43,12 +45,14 @@ window.mw.loader.using(['mediawiki.api', 'mediawiki.util'], function () {
             },
         })
 
+        app.config.globalProperties.$location = window.location
+
         app.use(vuetify);
 
-        if (document.getElementById('app')) {
+        if (document.getElementById('app'))
             app.mount('#app');
-            console.log("Application Vue (App.vue) montée avec succès.");
-        }
+
+        initWidgets(vuetify)
     });
 });
 

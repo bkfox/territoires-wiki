@@ -1,10 +1,15 @@
 {{{headdata}}}
 <div id="app"></div>
 
-<div id="mediawiki-raw-holder" style="display: none;">
-    <div id="bodyContent" class="mw-body-content">
-        {{{html-bodytext}}}
+<div id="mediawiki-raw-holder" data-mw-ve-target-container style="display: none;">
+    <div id="content" class="mw-body">
+        <a id="ca-edit" href="#" style="display:none;"></a>
+        <div id="bodyContent" class="mw-body-content">
+            <section id="mw-content-text" class="mw-content-ltr">
+                {{{html-bodytext}}}
+            </section>
+        </div>
+        <div id="wiki-reporttime">{{{html-reporttime}}}</div>
     </div>
-    <div id="wiki-reporttime">{{{html-reporttime}}}</div>
 </div>
 

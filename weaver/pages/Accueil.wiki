@@ -3,72 +3,58 @@
 <p>Explorez, rencontrez, c'est à vous de jouer!</p>
 
 
-<div class="wiki-card-grid noexcerpt">
-
-    <div class="wiki-card">
+<div class="w-grid">
+    <div class="w-grid-box">
         <h2 class="wiki-card-title">Actualités</h2>
-        {{Components/List|
-        {{#ask:
-            [[Category:Articles]]
-            |?description
-            |?datePublished
-            |limit=6
-            |sort=datePublished
-            |order=descending
-            |format=template
-            |template=Component/ListItem/Article
-        }}
-        }}
+
+        <div data-widget="ContentList" data-props='{
+            "query": {
+                "categories":["News"],
+                "extracts": true,
+                "sort": "-Modification_date"
+            }
+        }'>
     </div>
 
-    <div class="wiki-card">
+    <div class="w-grid-box">
         <h2 class="wiki-card-title">Événements</h2>
-        {{Components/List
-        {{#ask:
-            [[Category:Events]]
-            [[dateStart::+]]
-            |?=page
-            |?dateStart
-            |?dateEnd
-            |?place
-            |?territory
-            |?eventType
-            |sort=dateStart
-            |order=ascending
-            |limit=6
-            |format=template
-            |template=Components/Card/Event
-            |named args=yes
-        }}
-        }}
+
+        <div data-widget="ContentList" data-props='{
+            "query": {
+                "categories":["Events"],
+                "extracts": true,
+                "sort": "-Modification_date"
+            }
+        }'>
     </div>
 
-    <div class="wiki-card">
+    <div class="w-grid-box">
         <h2 class="wiki-card-title">Territoires</h2>
-        {{#dpl:
-            namespace=main
-            |ordermethod=created
-            |order=descending
-            |count=6
-            |include=*
-            |includemaxlength=300
-            |includetrim=true
-            |eliminate=categories
-            |mode=userformat
-            |listseparators=
-            <div class="wiki-card-list">,
-                <div class="wiki-list-item">
-                <div class="wiki-list-item-title">[[%PAGE%|%TITLE%]]</div>
-                ,
-                </div>
-            </div>
-            |secseparators=
-                <div class="wiki-list-item-excerpt">,
-            </div>
-        }}
-    </div>
 
-    <div class="wiki-card">
+        <div data-widget="ContentList" data-props='{
+            "query": {
+                "categories":["Territories"],
+                "extracts": true,
+                "sort": "-Modification_date"
+            }
+        }'>
+    </div>
+</div>
+
+<div data-widget="ContentMap" data-props='{
+        "query": {
+            "printouts":["coordinates=coordinates"],
+            "sort": "-Modification_date",
+            "filters": [
+                ["coordinates", "exists"]
+            ],
+            "extracts": true
+        }
+    }'>
+</div>
+
+<div class="w-grid">
+    <div class="w-grid-box">
         <h2 class="wiki-card-title">Catégories</h2>
         {{#dpl:
             namespace=Category

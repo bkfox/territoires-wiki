@@ -1,25 +1,25 @@
 <template>
-  <v-list open-strategy="multiple">
-    <div v-for="(section, idx) in sidebarMenu" :key="idx">
-      <!-- Section de navigation extensible (ex: Navigation, Outils) -->
-      <v-list-group :value="section.title">
-        <template v-slot:activator="{ props }">
-          <v-list-item v-bind="props" :title="section.title" class="text-subtitle-1 font-weight-bold"></v-list-item>
+    <v-menu transition="scale-transition">
+        <template #activator="{ props }">
+            <v-btn icon v-bind:="props" color="primary">
+                <v-icon>mdi-menu</v-icon>
+            </v-btn>
         </template>
+        <v-list open-strategy="multiple" density="compact">
+            <template v-for="(section, idx) in sidebarMenu" :key="idx">
+                <v-list-subheader>{{ section.title }}</v-list-subheader>
 
-        <!-- Liens internes de la section -->
-        <v-list-item
-          v-for="link in section.links"
-          :key="link.text"
-          :title="link.text"
-          :href="link.href"
-          link
-          prepend-icon="mdi-link-variant"
-        ></v-list-item>
-      </v-list-group>
-      <v-divider class="my-1"></v-divider>
-    </div>
-  </v-list>
+                <v-list-item
+                    v-for="link in section.links"
+                    :key="link.text"
+                    :title="link.text"
+                    :href="link.href"
+                    link
+                    prepend-icon="mdi-link-variant"
+                    ></v-list-item>
+            </template>
+        </v-list>
+    </v-menu>
 </template>
 
 <script setup>

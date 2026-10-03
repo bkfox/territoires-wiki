@@ -6,10 +6,9 @@
 {{ '{{#set:' }}{{ name }}={{ parameter(name) }}{{ '}}' }}
 {%- endmacro %}
 
-
 {% macro display_map(name) -%}
 {% set parameter = '{{{' ~ name ~ '|}}}' %}
-{{ '{{#if:' ~ parameter ~ '|{{#display_map:' ~ parameter ~ '|height=200px|width=290px|zoom=13}}}}' }}
+{{ '{{#if:' ~ parameter ~ '|{{#display_map:' ~ parameter ~ '|width=100%|height=280|zoom=13}}}}' }}
 {%- endmacro %}
 
 <noinclude>
@@ -18,37 +17,36 @@
 Template pour les pages de type **{{ model.label }}**.
 }}
 </noinclude><includeonly>
+{| id="infobox" class="infobox noexcerpt" style="display:none"
 
-{| class="infobox noexcerpt"
-
-{% if "name" in properties %}
+{%- if "name" in properties %}
 ! colspan="2" | {{ parameter("name") }}
 {% endif %}
 
-{% if "coordinates" in properties %}
+{%- if "coordinates" in properties %}
 |-
 ! colspan="2" class="infobox-map" |
-{{ display_map("coordinates") }}
+<div class="wiki-map-source-container">
+    {{ display_map("coordinates") }}
+</div>
 {%- endif %}
 
-{% for group in infobox %}
-{% for property in group.properties %}
-{% if property.name not in ("name", "coordinates") -%}
+{%- for group in infobox %}
+|-
+! colspan="2" class="infobox-subheader" | {{ group.label }}
+{%- for property in group.properties %}
+{%- if property.name not in ("name", "coordinates") %}
 |-
 ! {{ property.label }}
 | {{ parameter(property.name) }}
 {% endif %}
-{% endfor %}
-{% endfor %}
-
+{%- endfor %}
+{%- endfor %}
 |}
 
-{% for property in properties.values() %}
+
+{%- for property in properties.values() -%}
 {{ set_property(property.name) }}
 {% endfor %}
-
-{{ '{{#if:' }}{{ parameter("description") }}|{{ parameter("description") }}{{ '}}' }}
-
 [[Category:{{ model.category.name }}]]
-
 </includeonly>

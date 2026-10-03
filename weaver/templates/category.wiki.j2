@@ -1,12 +1,13 @@
 {{ model.description or "" }}
 
 {% if 'coordinates' in model.properties %}
-{{ '{{#ask:' }}
- [[{{ view.title }}]]
- |format=leaflet
- |?Coordinates
- |cluster=on
- |zoom=4
-{{ '}}' }}
+<div data-widget="ContentMap" data-props='{
+    "query": {
+        "categories":["{{ view.model.category.name }}"],
+        "printouts":["coordinates=coordinates"],
+        "extracts": true
+    }
+}'>
+</div>
 {% endif %}
 
