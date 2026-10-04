@@ -1,6 +1,8 @@
 import type { Coordinates } from "@/types/smw"
 import type { MapIcon } from '@/types/map'
 
+import { calculateDistance } from './geo'
+
 export interface SmwResultOptions {
     title: string
     url: string
@@ -54,22 +56,3 @@ function normalizeCategory( category: string, ): string {
     return category.replace(/^Category:/i, "")
 }
 
-function calculateDistance(
-    first: Coordinates,
-    second: Coordinates,
-): number {
-    const earthRadiusKm = 6371
-
-    const latitude1 = first.latitude * Math.PI / 180
-    const latitude2 = second.latitude * Math.PI / 180
-    const deltaLatitude = (second.latitude - first.latitude) * Math.PI / 180
-    const deltaLongitude = (second.longitude - first.longitude) * Math.PI / 180
-
-    const value =
-        Math.sin(deltaLatitude / 2) ** 2 +
-        Math.cos(latitude1) *
-        Math.cos(latitude2) *
-        Math.sin(deltaLongitude / 2) ** 2
-
-    return (earthRadiusKm * 2 * Math.atan2(Math.sqrt(value), Math.sqrt(1 - value)))
-}

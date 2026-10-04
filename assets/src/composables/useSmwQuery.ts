@@ -71,6 +71,8 @@ export function useSmwQuery() {
             hasMore.value = Boolean(response.query?.["query-continue-offset"])
             return results.value
         } catch (cause) {
+            console.log(cause)
+
             const exception = cause instanceof Error ? cause : new Error(String(cause))
             error.value = exception
             results.value = []
@@ -94,6 +96,7 @@ async function requestSmw( options: SmwQueryOptions, ): Promise<SmwApiResponse> 
 }
 
 
+// ---- Query
 function buildQuery( options: SmwQueryOptions, ): string {
     const parts: string[] = []
 
@@ -102,7 +105,6 @@ function buildQuery( options: SmwQueryOptions, ): string {
     for (const filter of options.filters ?? [])
         parts.push( buildFilter(filter), )
 
-    addCoordinateCondition( parts, options, )
 
     for ( const printout of getPrintouts(options) )
         parts.push( `?${printout}`, )
@@ -118,6 +120,13 @@ function buildQuery( options: SmwQueryOptions, ): string {
 
     if (options.offset !== undefined)
         parts.push( `offset=${options.offset}`, )
+
+    if(options.nearby)
+        addCoordinateCondition( parts, options, )
+    else if(options.bounds) {
+        const property = options.bounds.property ?? "coordinates"
+        parts.push(buildBoundsCondition(property, options.bounds))
+    }
 
     return parts.join("|")
 }
@@ -145,7 +154,6 @@ const filterOps = {
 }
 
 function buildFilter(filter: SmwFilter): string {
-    console.log(filterOps, filter)
     const raw = filterOps[filter[1]]
     return raw?.replaceAll("{property}", filter[0]).replaceAll("{value}", filter[2])
 
@@ -159,8 +167,7 @@ function addCoordinateCondition( parts: string[], options: SmwQueryOptions, ): v
         return
 
     const property = nearby.property ?? getNearbyProperty(options.coordinates)
-    parts.push( `[[${property}::~` + `${nearby.latitude},${nearby.longitude}]]`, )
-    parts.push( `distance=${nearby.radiusKm} km`, )
+    parts.push( `[[${property}::${nearby.latitude},${nearby.longitude} (${parseInt(nearby.radiusKm)} km)]]`)
 }
 
 
@@ -182,6 +189,16 @@ function getNearbyProperty( source?: CoordinatesSource, ): string {
 }
 
 
+function buildBoundsCondition(property: string, bounds: SmwBounds): string {
+    return [
+        `[[${property}::+]]`,
+        `[[${property}::>${bounds.south}°, ${bounds.west}°]]`,
+        `[[${property}::<${bounds.north}°, ${bounds.east}°]]`,
+    ].join(" ")
+}
+
+
+// ---- Response
 function getPrintouts( options: SmwQueryOptions, ): string[] {
     const properties = new Set(options.printouts ?? [])
 
@@ -211,6 +228,22 @@ function normalizeResults( response: SmwApiResponse, source?: CoordinatesSource,
     })
 }
 
+
+function applyNearbyDistance( results: SmwResult[], options: SmwQueryOptions, ): void {
+    const nearby = options.nearby
+
+    if (!nearby)
+        return
+
+    /*
+     * SMW has already applied the authoritative radius
+     * filter. We only calculate the exact distance locally
+     * so consumers can display or sort it.
+     */
+    for (const result of results) {
+        result.distanceKm = result.distanceTo({ latitude: nearby.latitude, longitude: nearby.longitude, })
+    }
+}
 
 function extractCoordinates( properties: Record<string, unknown[]>, source?: CoordinatesSource="coordinates"): Coordinates | undefined {
     if (!source)
@@ -248,23 +281,6 @@ function parseCoordinate( value: unknown, ): Coordinates | undefined {
 function toNumber( value: unknown, ): number | undefined {
     const number = typeof value === "number" ? value : Number(value)
     return Number.isFinite(number) ? number : undefined
-}
-
-
-function applyNearbyDistance( results: SmwResult[], options: SmwQueryOptions, ): void {
-    const nearby = options.nearby
-
-    if (!nearby)
-        return
-
-    /*
-     * SMW has already applied the authoritative radius
-     * filter. We only calculate the exact distance locally
-     * so consumers can display or sort it.
-     */
-    for (const result of results) {
-        result.distanceKm = result.distanceTo({ latitude: nearby.latitude, longitude: nearby.longitude, })
-    }
 }
 
 

@@ -10,6 +10,11 @@ const { results, loading, error, hasMore, search } = useSmwQuery()
 
 async function reload() {
     try {
+        if(!props.query) {
+            results.value = []
+            return
+        }
+        
         await search(props.query)
     } catch (error) {
         emit("error", error instanceof Error ? error : new Error(String(error)))

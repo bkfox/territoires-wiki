@@ -49,7 +49,9 @@
                 ["coordinates", "exists"]
             ],
             "extracts": true
-        }
+        },
+        "autoloc": true,
+        "full": true
     }'>
 </div>
 

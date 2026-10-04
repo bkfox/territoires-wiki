@@ -19,14 +19,12 @@
       >
         {{ indicator.text }}
       </v-chip> -->
-      
-      <wiki-portlets-menu :portlets="pagePortlets"
-          icon="mdi-dots-vertical" title="This page"
-          no-icons />
+
       <wiki-portlets-menu :portlets="notificationsPortlets"
           icon="mdi-bell" title="Notifications" />
       <wiki-portlets-menu :portlets="userPortlets"
           icon="mdi-account" title="User Account" />
+      <app-settings-menu />
     </v-app-bar>
 
     <!-- Sidebar Vuetify -->
@@ -42,6 +40,10 @@
         
         <h1 id="firstHeading" class="text-h4 mb-4 font-weight-bold mw-first-heading">
             {{ context.page?.title }}
+
+            <wiki-portlets-menu :portlets="pagePortlets"
+                icon="mdi-dots-vertical" title="This page" variant="text"
+                no-icons />
         </h1>
 
         <wiki-infobox v-if="hasInfobox" :source="pageInfoBox" class="float-right" />
@@ -69,22 +71,28 @@
 import { ref, onMounted, nextTick } from 'vue'
 
 import {provideContext, getPortlets} from '@/composables/context'
+import {useAutoLocate} from '@/composables/useGeolocation'
+
 import WikiPortletsMenu from './WikiPortletsMenu.vue'
 import WikiInfobox from './WikiInfobox.vue'
 import ContentMap from './ContentMap.vue'
+import AppSettingsMenu from './AppSettingsMenu.vue'
 
 const drawer = ref(true)
 const contentTarget = ref(null)
 const hasInfobox = ref(false)
 
+// --- composables
 const context = provideContext()
 const navPortlets = getPortlets(context, "nav", "portlets-first")
 const pagePortlets = getPortlets(context, "portlets", "views", "actions", "namespaces")
 const notificationsPortlets = getPortlets(context, "portlets", "notifications")
 const userPortlets = getPortlets(context, "portlets", "user-menu")
 
-const pageInfoBox = "#bodyContent > section > div > #infobox"
+const {autoLocate} = useAutoLocate()
 
+// --- Logic
+const pageInfoBox = "#bodyContent > section > div > #infobox"
 
 onMounted(async () => {
   const originalContent = document.getElementById('mediawiki-raw-holder');

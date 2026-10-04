@@ -1,79 +1,112 @@
 <script setup lang="ts">
-import { computed, ref } from "vue"
+import { computed, ref, onMounted } from "vue"
 import {debounce} from "lodash-es"
-import { LIcon, LMap, LMarker, LPopup, LTileLayer } from "@vue-leaflet/vue-leaflet"
+import { LControl, LIcon, LMap, LMarker, LPopup, LTileLayer } from "@vue-leaflet/vue-leaflet"
 import "leaflet/dist/leaflet.css"
 
 import SmwQuery from "./SmwQuery.vue"
 import type { Coordinates, SmwQueryOptions } from "@/types/smw"
+import { getMapBounds, getExpandedBounds, containsBounds } from '@/smw/geo'
+import { useGeolocation } from '@/composables/useGeolocation'
 
 const props = withDefaults(defineProps<{
+    // ---- SMW
+    /** SMW Query options **/
     query: SmwQueryOptions
+    /** Preload margin bound **/
+    boundsMargin: number
+
+    // ---- Map
+    /** Center of the map (lat,lon). **/
     center?: [number, number]
+    /** Map zoom **/
     zoom?: number
+    /** Map height **/
     height?: string
+    /** Tiles URL **/
     tileUrl?: string
+    /** Map attribution **/
     attribution?: string
+
+    // ---- Settings
+    autoloc: boolean
+    full: boolean
 }>(), {
     center: () => [50.5, 4.5],
     zoom: 7,
     height: "400px",
     tileUrl: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
     attribution: "&copy; OpenStreetMap contributors",
+    boundsMargin: 300,
 })
 const zoom = ref(props.zoom)
-
 const initialCenter = computed<[number, number]>(() => props.center ?? [50.5, 4.5])
-
-// TODO: observe
 const currentQuery = ref(props.query)
+const geoloc = useGeolocation()
 
-function refreshQuery(event: { target: LeafletMap }) {
-    const map = event.target
-    const bounds = map.getBounds()
-    const center = map.getCenter()
+const map = ref(null) 
+
+/** Go to user location **/
+async function centerOnUser() {
+    const coordinates = await geoloc.request()
+    coordinates && centerOn(coordinates.latitude, coordinates.longitude)
+}
+
+/** Go to location **/
+async function centerOn(lat, lon) {
+    console.log(map.value)
+    if(map.value)
+        map.value.setView([lat, lon], props.zoom ?? map.value.getZoom())
+}
+
+/** Refresh current location **/
+function refreshQuery(map: LeafletMap) {
+    if(!props.query || props.query.nearby)
+        return
+
+    const query = currentQuery.value
+    const bounds = query?.bounds && getMapBounds(map)
+    if(bounds && containsBounds(query.bounds, bounds))
+        return
 
     currentQuery.value = {
         ...props.query,
-        nearby: {
-            latitude: center.lat,
-            longitude: center.lng,
-            radiusKm: calculateBoundsRadius(map),
-            property: props.query.coordinates ?? "coordinates",
-        },
+        bounds: getExpandedBounds(map, props.boundsMargin),
     }
 }
 
+/** Debounced version of refreshQuery **/
 const debouncedRefreshQuery = debounce(refreshQuery, 300)
 
 
-function calculateBoundsRadius(map: LeafletMap, margin: number=0): number {
-    const bounds = map.getBounds()
-    const center = map.getCenter()
-
-    const corners = [
-        bounds.getNorthWest(),
-        bounds.getNorthEast(),
-        bounds.getSouthWest(),
-        bounds.getSouthEast(),
-    ]
-
-    return Math.max(
-        ...corners.map(corner =>
-            center.distanceTo(corner) / 1000
-        )
-    ) + margin
+// --- events
+function onMapMove(event: {target: LeafletMap}) {
+    if(!props.query.nearby)
+        debouncedRefreshQuery(event.target)
 }
+
+async function onMapReady(instance: LeafletMap) {
+    map.value = instance
+
+    const coordinates = props.autoloc && await geoloc.autoRequest()
+    coordinates && centerOn(coordinates.latitude, coordinates.longitude)
+}
+
+const exposed = {currentQuery, map, centerOn, centerOnUser}
+defineExpose(exposed)
 </script>
 
 <template>
     <SmwQuery :query="currentQuery">
         <template #default="{ results, loading, error }">
             <div class="w-content-map" :style="{ height }">
-                <v-slot name="left" :results="results" :loading="loading"></v-slot>
+                <v-slot name="prepend" :results="results" :loading="loading" v-bind="exposed"></v-slot>
                 <div class="w-content-map-map" :style="{height}">
-                    <LMap v-model:zoom="zoom" :center="initialCenter">
-                        <LTileLayer :url="tileUrl" :attribution="tileAttribution" layer-type="base" name="Map" />
+                    <LMap v-model:zoom="zoom" :center="initialCenter"
+                            @ready="onMapReady"
+                            @moveend="onMapMove" @zoomend="onMapMove">
+                        <LTileLayer :url="props.tileUrl" :attribution="props.attribution" layer-type="base" name="Map" />
+                        <v-slot name="default" :results="results" :loading="loading" v-bind="exposed"></v-slot>
                         <template v-for="result in results">
                             <LMarker
                                 v-if="result?.coordinates"
@@ -96,12 +129,22 @@ function calculateBoundsRadius(map: LeafletMap, margin: number=0): number {
                                     <p class="mt-1 mb-1">{{ result.extract }}</p>
                                 </LPopup>
                             </LMarker>
+                            <LControl v-if="props.full" position="bottomright">
+                                <v-btn
+                                    class="content-map-location"
+                                    icon="mdi-crosshairs-gps"
+                                    size="x-small"
+                                    variant="elevated" color="seconday"
+                                    :loading="locationLoading"
+                                    aria-label="Centrer sur ma position"
+                                    @click="centerOnUser"
+                                />
+                            </LControl>
                         </template>
                     </LMap>
-                    <v-slot name="right" :results="results" :loading="loading"></v-slot>
+                    <v-slot name="append" :results="results" :loading="loading" v-bind="exposed"></v-slot>
                 </div>
             </div>
-            <v-slot name="default" :results="results" :loading="loading"></v-slot>
             <v-progress-linear v-if="loading" indeterminate />
             <v-alert v-if="error" type="error" density="compact" class="mt-2">{{ error.message }}</v-alert>
         </template>

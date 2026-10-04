@@ -1,10 +1,11 @@
 <template>
-    <v-menu v-if="!isEmpty" transition="scale-transition">
-        <template v-slot:activator="{ props }">
-            <v-btn v-bind:="props"
+    <v-menu v-if="!isEmpty">
+        <template #activator="{ props }">
+            <v-btn v-bind="props"
                 :prepend-icon="label && icon"
                 :icon="icon"
                 :text="label"
+                :variant="variant"
                 :color="attrs.color || 'primary'"
                 :title="title || label || ''"/>
         </template>
@@ -17,10 +18,11 @@ import { computed, useAttrs } from 'vue'
 import WikiPortletsList from './WikiPortletsList.vue'
 
 const attrs = useAttrs()
-const {icon, title, label, portlets} = defineProps({
+const {icon, title, label, portlets, variant} = defineProps({
     icon: String,
     title: String,
     label: String,
+    variant: String,
     portlets: Object,
 })
 

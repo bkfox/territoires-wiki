@@ -45,6 +45,17 @@ export interface SmwNearby {
     sort?: boolean
 }
 
+
+// src/types/smw.ts
+export interface SmwBounds {
+    property?: string
+    north: number
+    south: number
+    east: number
+    west: number
+}
+
+
 export interface SmwQueryOptions {
     /** Pages categories **/
     categories?: string[]
@@ -54,6 +65,8 @@ export interface SmwQueryOptions {
     coordinates?: CoordinatesSource
     /** Distance from the provided coordinates **/
     nearby?: SmwNearby
+    /** Items in this bounding view **/
+    bounds?: SmwBounds
     /** Return those properties. **/
     printouts?: string[]
     /** Sort order **/
