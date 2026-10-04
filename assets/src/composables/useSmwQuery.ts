@@ -110,9 +110,13 @@ function buildQuery( options: SmwQueryOptions, ): string {
         parts.push( `?${printout}`, )
 
     if (options.sort) {
-        const sort = options.sort.replace("-", "")
-        const order = options.sort.includes("-") ? "descending": "ascending"
-        parts.push( `sort=${sort}`, `order=${order}`, )
+        if(options.sort == '?')
+            parts.push('order=random')
+        else {
+            const sort = options.sort.replace("-", "")
+            const order = options.sort.includes("-") ? "descending": "ascending"
+            parts.push( `sort=${sort}`, `order=${order}`, )
+        }
     }
 
     if (options.limit !== undefined)

@@ -69,8 +69,14 @@ export interface SmwQueryOptions {
     bounds?: SmwBounds
     /** Return those properties. **/
     printouts?: string[]
-    /** Sort order **/
-    sort?: SmwSort
+    /**
+     * Sort order.
+     * 
+     * Can have one of the following formats:
+     * - `-[NAME]`, `[NAME]`: sort desc/asc by property
+     * - `?`: random sort
+     */
+    sort?: string | "?"
 
     limit?: number
     offset?: number

@@ -3,46 +3,64 @@
 <p>Explorez, rencontrez, c'est à vous de jouer!</p>
 
 
-<div class="w-grid">
-    <div class="w-grid-box">
-        <h2 class="wiki-card-title">Actualités</h2>
+<div class="tw-grid">
+    <div class="tw-grid-box">
+        <h2>Actualités</h2>
 
         <div data-widget="ContentList" data-props='{
             "query": {
                 "categories":["News"],
                 "extracts": true,
+                "limit": 5,
                 "sort": "-Modification_date"
             }
-        }'>
+        }'></div>
     </div>
 
-    <div class="w-grid-box">
-        <h2 class="wiki-card-title">Événements</h2>
+    <div class="tw-grid-box">
+        <h2>Agenda</h2>
 
         <div data-widget="ContentList" data-props='{
             "query": {
                 "categories":["Events"],
                 "extracts": true,
+                "limit": 5,
                 "sort": "-Modification_date"
             }
-        }'>
+        }'></div>
     </div>
 
-    <div class="w-grid-box">
-        <h2 class="wiki-card-title">Territoires</h2>
+    <div class="tw-grid-box">
+        <h2>Territoires</h2>
 
         <div data-widget="ContentList" data-props='{
             "query": {
                 "categories":["Territories"],
                 "extracts": true,
+                "limit": 5,
                 "sort": "-Modification_date"
             }
-        }'>
+        }'></div>
+    </div>
+
+    <div class="tw-grid-box">
+        <h2>Au hasard...</h2>
+
+        <div data-widget="ContentList" data-props='{
+            "query": {
+                "categories":["Territories"],
+                "extracts": true,
+                "limit": 5,
+                "sort": "?"
+            }
+        }'></div>
     </div>
 </div>
 
+<h2>Explorez</h2>
 <div data-widget="ContentMap" data-props='{
         "query": {
+            "categories": ["Territories", "Organization", "Places", "Project"],
             "printouts":["coordinates=coordinates"],
             "sort": "-Modification_date",
             "filters": [
@@ -52,27 +70,28 @@
         },
         "autoloc": true,
         "full": true
-    }'>
+    }'></div>
 </div>
 
-<div class="w-grid">
-    <div class="w-grid-box">
-        <h2 class="wiki-card-title">Catégories</h2>
-        {{#dpl:
-            namespace=Category
-            |mode=none
-            |shownamespace=false
-            |ordermethod=title
-            |order=ascending
-        }}
+
+
+<div class="tw-grid">
+    <div class="tw-grid-box">
+        <h2>Catégories</h2>
+
+        <div data-widget="ModelList"></div>
+    </div>
+    <div class="tw-grid-box">
+        <h2>Pour démarrer</h2>
+
+        <ul>
+            <li>[https://www.mediawiki.org/wiki/Special:MyLanguage/Manual:Configuration_settings Liste des paramètres de configuration]</li>
+            <li>[https://www.mediawiki.org/wiki/Special:MyLanguage/Manual:FAQ Questions courantes sur MediaWiki]</li>
+            <li>[https://lists.wikimedia.org/postorius/lists/mediawiki-announce.lists.wikimedia.org/ Liste de discussion sur les distributions de MediaWiki]</li>
+            <li>[https://www.mediawiki.org/wiki/Special:MyLanguage/Localisation#Translation_resources Adaptez MediaWiki dans votre langue]</li>
+            <li>[https://www.mediawiki.org/wiki/Special:MyLanguage/Manual:Combating_spam Apprendre comment combattre le pourriel dans votre wiki]</li>
+        </ul>
+
     </div>
 </div>
-
-
-== Pour démarrer ==
-* [https://www.mediawiki.org/wiki/Special:MyLanguage/Manual:Configuration_settings Liste des paramètres de configuration]
-* [https://www.mediawiki.org/wiki/Special:MyLanguage/Manual:FAQ Questions courantes sur MediaWiki]
-* [https://lists.wikimedia.org/postorius/lists/mediawiki-announce.lists.wikimedia.org/ Liste de discussion sur les distributions de MediaWiki]
-* [https://www.mediawiki.org/wiki/Special:MyLanguage/Localisation#Translation_resources Adaptez MediaWiki dans votre langue]
-* [https://www.mediawiki.org/wiki/Special:MyLanguage/Manual:Combating_spam Apprendre comment combattre le pourriel dans votre wiki]
 

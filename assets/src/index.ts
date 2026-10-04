@@ -8,7 +8,7 @@ import colors from 'vuetify/util/colors'
 import './index.scss';
 
 import App from './components/App.vue';
-import {initWidgets} from './widgets';
+import {initWidgets, setGlobals} from './widgets';
 
 
 window.mw.loader.using(['mediawiki.api', 'mediawiki.util', 'ext.maps.leaflet.library'], function () {
@@ -45,8 +45,7 @@ window.mw.loader.using(['mediawiki.api', 'mediawiki.util', 'ext.maps.leaflet.lib
             },
         })
 
-        app.config.globalProperties.$location = window.location
-
+        setGlobals(app)
         app.use(vuetify);
 
         if (document.getElementById('app'))

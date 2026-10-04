@@ -13,9 +13,7 @@ const props = withDefaults(defineProps<{
         <template #default="{ results, loading, error }">
             <v-list>
                 <template v-for="item in results">
-                    <v-list-item>
-                        <v-list-item-title><a :href="item.url">{{ item.title }}</a></v-list-item-title>
-                        <p v-if="item.extract">{{ item.extract }}</p>
+                    <v-list-item :href="item.url" :title="item.title" :subtitle="item.extract">
                     </v-list-item>
                 </template>
             </v-list>

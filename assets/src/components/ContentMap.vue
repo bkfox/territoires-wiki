@@ -54,7 +54,6 @@ async function centerOnUser() {
 
 /** Go to location **/
 async function centerOn(lat, lon) {
-    console.log(map.value)
     if(map.value)
         map.value.setView([lat, lon], props.zoom ?? map.value.getZoom())
 }
@@ -99,9 +98,9 @@ defineExpose(exposed)
 <template>
     <SmwQuery :query="currentQuery">
         <template #default="{ results, loading, error }">
-            <div class="w-content-map" :style="{ height }">
+            <div class="tw-content-map" :style="{ height }">
                 <v-slot name="prepend" :results="results" :loading="loading" v-bind="exposed"></v-slot>
-                <div class="w-content-map-map" :style="{height}">
+                <div class="tw-content-map-map" :style="{height}">
                     <LMap v-model:zoom="zoom" :center="initialCenter"
                             @ready="onMapReady"
                             @moveend="onMapMove" @zoomend="onMapMove">
@@ -129,37 +128,41 @@ defineExpose(exposed)
                                     <p class="mt-1 mb-1">{{ result.extract }}</p>
                                 </LPopup>
                             </LMarker>
-                            <LControl v-if="props.full" position="bottomright">
-                                <v-btn
-                                    class="content-map-location"
-                                    icon="mdi-crosshairs-gps"
-                                    size="x-small"
-                                    variant="elevated" color="seconday"
-                                    :loading="locationLoading"
-                                    aria-label="Centrer sur ma position"
-                                    @click="centerOnUser"
-                                />
-                            </LControl>
                         </template>
+                        <LControl v-if="props.full" position="bottomright">
+                            <v-btn
+                                class="content-map-location"
+                                icon="mdi-crosshairs-gps"
+                                size="x-small"
+                                variant="elevated" color="seconday"
+                                :loading="locationLoading"
+                                aria-label="Centrer sur ma position"
+                                @click="centerOnUser"
+                            />
+                        </LControl>
                     </LMap>
                     <v-slot name="append" :results="results" :loading="loading" v-bind="exposed"></v-slot>
                 </div>
+                <v-progress-linear v-if="loading" indeterminate class="tw-loading" />
             </div>
-            <v-progress-linear v-if="loading" indeterminate />
-            <v-alert v-if="error" type="error" density="compact" class="mt-2">{{ error.message }}</v-alert>
         </template>
     </SmwQuery>
 </template>
 <style>
-.w-content-map {
+.tw-content-map {
     position: relative;
 }
 
-.w-content-map .w-content-map-list {
+.tw-content-map .tw-content-map-list {
     position: absolute;
     top: 0px;
     min-width: 300px;
     height: 100%;
     width: 50%;
+}
+
+.tw-content-map .tw-loading {
+    position: absolute;
+    z-index:1000;
 }
 </style>

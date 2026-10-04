@@ -260,3 +260,26 @@ article img {
     color: rgb(var(--v-theme-primary)) !important;
     min-height: 20px !important;
 }
+
+a .v-list-item-subtitle {
+    color: rgb(var(--v-theme-on-background));
+}
+
+
+/** Custom classes **/
+.tw-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(400px, 1fr));
+    gap: 1rem;
+}
+
+.tw-grid-box {
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 959px) {
+    .tw-grid {
+        grid-template-columns: 1fr;
+    }
+}
+

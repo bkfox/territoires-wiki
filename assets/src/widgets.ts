@@ -2,14 +2,20 @@ import { createApp, h, type Component, type VNode } from "vue"
 
 import ContentMap from './components/ContentMap.vue'
 import ContentList from './components/ContentList.vue'
+import ModelList from './components/ModelList.vue'
 import SmwQuery from './components/SmwQuery.vue'
 
 
 /** Widgets registry mapping name to components **/
 export const widgetsRegistry = {
-    SmwQuery, ContentMap, ContentList
+    SmwQuery, ContentMap, ContentList, ModelList
 }
 
+
+export function setGlobals(app) {
+    app.config.globalProperties.$location = window.location
+    app.config.globalProperties.$weaverModels = window.weaverModels
+}
 
 export function initWidgets(vuetify: unknown, root: ParentNode = document) {
     const widgets = Array.from(root.querySelectorAll<HTMLElement>("[data-widget]"))
@@ -25,6 +31,7 @@ export function initWidgets(vuetify: unknown, root: ParentNode = document) {
             setup: () => () => vnode,
         })
 
+        setGlobals(app)
         app.use(vuetify)
         app.mount(element)
     }

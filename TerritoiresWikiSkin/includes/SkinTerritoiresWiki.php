@@ -12,6 +12,7 @@ class ContextBuilder {
         'data-logos.icon' => 'data-logos.icon',
         'page.isArticle' => 'is-article',
         'page.isMainPage' => 'is-mainpage',
+        "toc" => "data-toc",
         # 'sidebar'
     ];
 
