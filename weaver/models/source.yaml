@@ -2,6 +2,7 @@ model:
     name: Source
     label: Source
     description: Source documentaire utilisée pour documenter une information.
+    mdi_icon: link-variant
     groups:
         - dates
         - content
@@ -16,6 +17,3 @@ model:
             description: Type de la source documentaire.
             required: false
             multiple: false
-    category:
-        name: Sources
-        label: Sources

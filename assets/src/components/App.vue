@@ -23,6 +23,7 @@
                 placeholder="Search"
                 density="compact" style="max-width:20rem" />
             <template #append>
+                <app-create-menu :user="context.user" />
                 <wiki-portlets-menu nav :portlets="notificationsPortlets"
                     icon="mdi-bell" title="Notifications" />
                 <wiki-portlets-menu nav :portlets="userPortlets"
@@ -31,23 +32,16 @@
             </template>
         </v-app-bar>
 
-        <v-navigation-drawer v-model="drawer" app>
-            <wiki-portlets-list nav :portlets="navPortlets"
-                icon="mdi-menu" title="Navigation" show-title>
-                <template #prepend>
-                    <template v-if="context?.toc">
-                        <app-toc :toc="context.toc" />
-                    </template>
-                </template>
-            </wiki-portlets-list>
-        </v-navigation-drawer>
-
+        <app-sidebar :portlets="navPortlets" :toc="context?.toc" v-model="drawer"/>
         <v-main>
             <v-container fluid class="pa-6 mw-body" id="content" role="main">
-                <h1 id="firstHeading" class="text-h4 mb-4 font-weight-bold mw-first-heading">
-                    <template v-if="!context.page?.isMainPage">
-                        {{ context.page?.title }}
-                    </template>
+                <h1 id="firstHeading" class="d-flex text-h4 mb-4 font-weight-bold mw-first-heading">
+                    <div ref="pageTitle">
+                        <template v-if="!context.page?.isMainPage">
+                            {{ context.page?.title }}
+                        </template>
+                    </div>
+                    <v-spacer/>
 
                     <small class="float-right">
                         <wiki-portlets-menu :portlets="pagePortlets"
@@ -84,16 +78,20 @@ import {provideContext, getPortlets} from '@/composables/context'
 import {useAutoLocate} from '@/composables/useGeolocation'
 
 import AppToc from './AppToc.vue'
+import AppCreateMenu from './AppCreateMenu.vue'
+import AppSettingsMenu from './AppSettingsMenu.vue'
+import AppSidebar from './AppSidebar.vue'
+
 import WikiPortletsMenu from './WikiPortletsMenu.vue'
-import WikiPortletsList from './WikiPortletsList.vue'
 import WikiInfobox from './WikiInfobox.vue'
 import ContentMap from './ContentMap.vue'
-import AppSettingsMenu from './AppSettingsMenu.vue'
 import SearchField from './SearchField.vue'
 
 const drawer = ref(false)
 const contentTarget = ref(null)
+const pageTitle = ref(null)
 const hasInfobox = ref(false)
+
 
 // --- composables
 const context = provideContext()
@@ -108,19 +106,35 @@ const {autoLocate} = useAutoLocate()
 const pageInfoBox = "#bodyContent > section > div > #infobox"
 
 onMounted(async () => {
-  const originalContent = document.getElementById('mediawiki-raw-holder');
-  if (originalContent && contentTarget.value) {
-    originalContent.style.display = 'block';
-    contentTarget.value.appendChild(originalContent);
-  }
+    const originalContent = document.getElementById('mediawiki-raw-holder');
+    if(originalContent) {
+        const heading = originalContent.querySelector('h1.pageTitle')
+        if(heading && pageTitle.value) {
+            pageTitle.value.innerHTML = heading.innerHTML
+            heading.remove()
+        }
+        
+        if(contentTarget.value) {
+            originalContent.style.display = 'block';
+            contentTarget.value.appendChild(originalContent);
+        }
+    }
 
-  hasInfobox.value = !!contentTarget.value.querySelector(pageInfoBox)
-  if (window.mw && window.mw.hook)
-    window.mw.hook('wikipage.content').fire($('#bodyContent'));
+    hasInfobox.value = !!contentTarget.value.querySelector(pageInfoBox)
+
+
+    if (window.mw && window.mw.hook)
+        window.mw.hook('wikipage.content').fire($('#bodyContent'));
 });
 
 const getCategoryUrl = (categoryName) => {
-  return window.mw.util.getUrl('Category:' + categoryName);
+    return window.mw.util.getUrl('Category:' + categoryName);
 };
+
+
+function getCurrentModel() {
+    
+}
+
 </script>
 

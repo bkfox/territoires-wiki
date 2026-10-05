@@ -1,6 +1,6 @@
 <template>
-    <v-card v-show="hasMap || fields.length" class="float-right ml-3"
-            variant="outlined" max-width="300" :title="props.title">
+    <v-card v-show="hasMap && fields.length" class="float-right ml-3"
+            variant="outlined" width="300" max-width="300" :title="props.title">
         <div ref="mapTarget" class="wiki-native-map-portal"/>
 
         <v-list lines="two" density="compact">

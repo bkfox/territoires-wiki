@@ -2,6 +2,7 @@ model:
     name: Event
     label: Événement
     description: Événement ponctuel ou organisé.
+    mdi_icon: calendar
     groups:
         - relations
         - geography
@@ -44,6 +45,3 @@ model:
             description: Statut de l'événement.
             required: false
             multiple: false
-    category:
-        name: Events
-        label: Événements

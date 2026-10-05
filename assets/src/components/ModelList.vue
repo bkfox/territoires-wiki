@@ -1,26 +1,23 @@
 <script setup lang="ts">
-import {computed} from 'vue'
+import {computed, useAttrs} from 'vue'
 
+import {useModels} from '@/composables/weaver'
+
+defineOptions({ inheritAttrs: false })
+
+const attrs = useAttrs()
 const props = defineProps({
-    models: Array,
+    ns: String,
+    noLink: Boolean,
+    noInfo: Boolean,
 })
-
-
-function getLabel(item) { return item.category?.label || item.label }
-function getUrl(item) { return window.mw.util.getUrl('Category:' + (item.category?.name || item.name)) }
-
-const items = computed(() => {
-    console.log(window.weaverModels)
-    const items = [...(props.models || window.weaverModels || [])]
-    items.sort((a, b) => getLabel(a) < getLabel(b) ? -1 :
-                         getLabel(a) > getLabel(b) ? 1 : 0)
-    return items
-})
-
+const {models, getModelUrl} = useModels()
 </script>
 <template>
-    <template v-for="item in items">
-        <v-list-item :title="getLabel(item)" :subtitle="item.description"
-            :href="getUrl(item)" />
+    <template v-for="item in models">
+        <v-list-item
+            :title="item.label" :subtitle="!props.noInfo && item.description || ''"
+            :value="item" :prependIcon="item.getMdiIcon()"
+            :href="!props.noLink && getModelUrl(item, ns)" />
     </template>
 </template>

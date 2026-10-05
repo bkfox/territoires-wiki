@@ -22,6 +22,7 @@ class ContextBuilder {
 
         $context = [
             'siteName'   => $skin->getContext()->getConfig()->get( 'Sitename' ),
+            "user" => $this->getUser($skin),
             'page' => [
                 'title'  => $title->getPrefixedText(),
                 'categories' => $this->getPageCategories($skin),
@@ -40,41 +41,23 @@ class ContextBuilder {
         return $context;
     }
 
-    private function getNestedValue( $data, string $path ) {
-        $keys = explode( '.', $path );
-        foreach ( $keys as $key ) {
-            if ( is_array( $data ) && array_key_exists( $key, $data ) ) {
-                $data = $data[$key];
-            } elseif ( is_object( $data ) && isset( $data->$key ) ) {
-                $data = $data->$key;
-            } else {
-                return null;
-            }
-        }
-        return $data;
+    protected function getUser($skin): array {
+        $user = $skin->getUser();
+
+        $canEdit = $user->isAllowed('edit');
+        return [
+            "name" => $user->getName(),
+            "realname" => $user->getRealName(),
+            "page" => $user->getUserPage(),
+            "talkPage" => $user->getTalkPage(),
+            "permissions" => [
+                "createPage" => $canEdit && $user->isAllowed("createpage"),
+                "edit" => $canEdit,
+            ]
+        ];
     }
 
-    private function setNestedValue( array $targetArray, string $path, $value ): array {
-        $keys = explode( '.', $path );
-        $current = &$targetArray;
-
-        foreach ( $keys as $i => $key ) {
-            if ( $i === count( $keys ) - 1 ) {
-                // Dernière clé : on pose la valeur finale
-                $current[$key] = $value;
-            } else {
-                // Clé intermédiaire : on s'assure d'avoir un sous-tableau propre
-                if ( !isset( $current[$key] ) || !is_array( $current[$key] ) ) {
-                    $current[$key] = [];
-                }
-                $current = &$current[$key];
-            }
-        }
-
-        return $targetArray;
-    }
-
-    private function getPageCategories($skin): array {
+    protected function getPageCategories($skin): array {
         $data = [];
         foreach ( $skin->getOutput()->getCategories() as $categoryName ) {
             $data[] = str_replace( '_', ' ', $categoryName );
@@ -82,7 +65,7 @@ class ContextBuilder {
         return $data;
     }
 
-    private function getPageIndicators($skin): array {
+    protected function getPageIndicators($skin): array {
         $data = [];
         foreach ( $skin->getOutput()->getIndicators() as $id => $htmlContent ) {
             $data['indicators'][] = [
@@ -93,7 +76,7 @@ class ContextBuilder {
         return $data;
     }
 
-    private function getPortlets($dataPortlets): array {
+    protected function getPortlets($dataPortlets): array {
         $results = [];
         foreach ($dataPortlets as $type => $group) {
             if(!isset($group["array-items"]))
@@ -127,6 +110,42 @@ class ContextBuilder {
             $results[substr($type, 5)] = $result;
         }
         return $results;
+    }
+
+    //! Get value by dotted path
+    protected function getNestedValue( $data, string $path ) {
+        $keys = explode( '.', $path );
+        foreach ( $keys as $key ) {
+            if ( is_array( $data ) && array_key_exists( $key, $data ) ) {
+                $data = $data[$key];
+            } elseif ( is_object( $data ) && isset( $data->$key ) ) {
+                $data = $data->$key;
+            } else {
+                return null;
+            }
+        }
+        return $data;
+    }
+
+    //! Set value into target using dotted path
+    protected function setNestedValue( array $targetArray, string $path, $value ): array {
+        $keys = explode( '.', $path );
+        $current = &$targetArray;
+
+        foreach ( $keys as $i => $key ) {
+            if ( $i === count( $keys ) - 1 ) {
+                // Dernière clé : on pose la valeur finale
+                $current[$key] = $value;
+            } else {
+                // Clé intermédiaire : on s'assure d'avoir un sous-tableau propre
+                if ( !isset( $current[$key] ) || !is_array( $current[$key] ) ) {
+                    $current[$key] = [];
+                }
+                $current = &$current[$key];
+            }
+        }
+
+        return $targetArray;
     }
 }
 

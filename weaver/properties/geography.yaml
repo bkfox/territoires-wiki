@@ -3,7 +3,6 @@ groups:
         label: Géographie
         properties:
             - coordinates
-            - geometry
             - address
             - country
             - parentPlace
@@ -15,13 +14,6 @@ properties:
         type: Geographic coordinate
         label: Coordonnées
         description: Coordonnées géographiques ponctuelles de l'élément.
-        required: false
-        multiple: false
-
-    geometry:
-        type: Text
-        label: Géométrie
-        description: Géométrie géographique de l'élément, notamment pour les lignes et les polygones.
         required: false
         multiple: false
 

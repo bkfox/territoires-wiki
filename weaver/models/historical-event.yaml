@@ -2,6 +2,7 @@ model:
     name: HistoricalEvent
     label: Événement historique
     description: Événement historique documenté.
+    mdi_icon: archive
     groups:
         - relations
         - geography
@@ -28,6 +29,3 @@ model:
             target: HistoricalEvent
             required: false
             multiple: true
-    category:
-        name: HistoricalEvents
-        label: Événements historiques

@@ -1,7 +1,8 @@
 model:
     name: Territory
-    label: Territoire
+    label: Territoires
     description: Territoire géographique, administratif, naturel, social...
+    mdi_icon: map
     groups:
         - relations
         - geography
@@ -18,6 +19,3 @@ model:
             description: Type du territoire.
             required: false
             multiple: false
-    category:
-        name: Territories
-        label: Territoires

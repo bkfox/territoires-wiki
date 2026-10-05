@@ -17,6 +17,9 @@ interface SearchResponse {
 }
 
 const attrs = useAttrs()
+const props = defineProps({
+    user: Object
+})
 const api = new mw.Rest()
 
 const search = ref("")
@@ -54,7 +57,7 @@ const searchPages = debounce(async (value: string): Promise<void> => {
             page => page.title.toLowerCase() === query.toLowerCase(),
         )
 
-        if (!exactMatch) {
+        if (!exactMatch && props.user?.permissions.createPage) {
             items.value = [
                 {
                     title: query,

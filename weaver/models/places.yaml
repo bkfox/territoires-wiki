@@ -2,6 +2,7 @@ model:
     name: Place
     label: Lieu
     description: Lieu géographique, bâtiment, espace ou site identifié.
+    mdi_icon: map-marker
     groups:
         - relations
         - geography
@@ -20,7 +21,3 @@ model:
             description: Type du lieu.
             required: false
             multiple: false
-    category:
-        name: Places
-        label: Lieux
-

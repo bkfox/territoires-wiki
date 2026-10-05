@@ -2,6 +2,7 @@ model:
     name: Topic
     label: Sujet
     description: Sujet ou thème permettant de catégoriser et relier les contenus.
+    mdi_icon: folder
     groups:
         - relations
         - geography
@@ -21,6 +22,3 @@ model:
             target: Topic
             required: false
             multiple: true
-    category:
-        name: Topics
-        label: Sujets

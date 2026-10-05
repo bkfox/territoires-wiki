@@ -2,6 +2,7 @@ model:
     name: Person
     label: Personne
     description: Personne physique.
+    mdi_icon: account
     groups:
         - relations
         - geography
@@ -12,6 +13,3 @@ model:
         groups:
             - geography
             - relations
-    category:
-        name: People
-        label: Personnes

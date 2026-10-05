@@ -1,9 +1,16 @@
+<h1 class="pageTitle">
+    {%- if model.mdi_icon -%}
+    <i class="mdi mdi-{{ model.mdi_icon }}"></i>
+    {%- endif -%}
+    <span class="pl-2">{{ model.label }}</span>
+</h1>
+
 {{ model.description or "" }}
 
 {% if 'coordinates' in model.properties %}
 <div data-widget="ContentMap" data-props='{
     "query": {
-        "categories":["{{ view.model.category.name }}"],
+        "categories":["{{ view.model.name }}"],
         "printouts":["coordinates=coordinates"],
         "extracts": true
     },

@@ -35,10 +35,10 @@
 
         <div data-widget="ContentList" data-props='{
             "query": {
-                "categories":["Territories"],
+                "categories":["Territory"],
                 "extracts": true,
                 "limit": 5,
-                "sort": "-Modification_date"
+                "sort": "?"
             }
         }'></div>
     </div>
@@ -48,7 +48,7 @@
 
         <div data-widget="ContentList" data-props='{
             "query": {
-                "categories":["Territories"],
+                "categories": ["Article", "Territory", "Organization", "Place", "Project", "Person"],
                 "extracts": true,
                 "limit": 5,
                 "sort": "?"
@@ -60,7 +60,7 @@
 <h2>Explorez</h2>
 <div data-widget="ContentMap" data-props='{
         "query": {
-            "categories": ["Territories", "Organization", "Places", "Project"],
+            "categories": ["Territory", "Organization", "Place", "Project"],
             "printouts":["coordinates=coordinates"],
             "sort": "-Modification_date",
             "filters": [
@@ -79,7 +79,7 @@
     <div class="tw-grid-box">
         <h2>Catégories</h2>
 
-        <div data-widget="ModelList"></div>
+        <div data-widget="ModelList" data-props='{"ns":"Category"}'></div>
     </div>
     <div class="tw-grid-box">
         <h2>Pour démarrer</h2>

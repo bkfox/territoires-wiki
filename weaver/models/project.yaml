@@ -2,6 +2,7 @@ model:
     name: Project
     label: Projet
     description: Projet ou initiative collective.
+    mdi_icon: account-group
     groups:
         - relations
         - geography
@@ -71,7 +72,3 @@ model:
             target: Project
             required: false
             multiple: true
-
-    category:
-        name: Projects
-        label: Projets
