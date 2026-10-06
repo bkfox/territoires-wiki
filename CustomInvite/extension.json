@@ -1,0 +1,23 @@
+{
+	"name": "CustomInvite",
+	"version": "1.2.0",
+	"author": "TerritoiresWiki",
+	"description": "Allows account creation via a secure JWT invitation link.",
+	"type": "other",
+	"AutoloadClasses": {
+		"MediaWiki\\Extension\\CustomInvite\\InviteHooks": "src/InviteHooks.php",
+		"MediaWiki\\Extension\\CustomInvite\\SpecialGenerateInvite": "src/SpecialGenerateInvite.php"
+	},
+	"Hooks": {
+    	"UserGetRights": "MediaWiki\\Extension\\CustomInvite\\InviteHooks::onUserGetRights",
+		"MediaWikiPerformAction": "MediaWiki\\Extension\\CustomInvite\\InviteHooks::onMediaWikiPerformAction"
+	},
+	"SpecialPages": {
+		"GenerateInvite": "MediaWiki\\Extension\\CustomInvite\\SpecialGenerateInvite"
+	},
+	"AvailableRights": [
+		"custominvite-generate"
+	],
+	"manifest_version": 2
+}
+

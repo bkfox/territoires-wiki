@@ -9,6 +9,7 @@ export const wikiIconMap: Record<string, string> = {
   'usercontributions': 'mdi-clipboard-text-clock-outline', // userContributions
   'logout': 'mdi-logout',                        // logOut / logout
   'unstar': 'mdi-star-minus-outline',            // unStar (Retirer de la liste de suivi)
+  'useradd': 'mdi-account-plus',
 
   // --- ACTIONS DE LA PAGE & PORTLETS ---
   'view': 'mdi-eye-outline',
@@ -156,7 +157,7 @@ export const wikiIconMap: Record<string, string> = {
   'import': 'mdi-import',
   'print': 'mdi-printer',
   'invisible': 'mdi-eye-off-outline',
-  'visible': 'mdi-eye-outline'
+  'visible': 'mdi-eye-outline',
 };
 
 export function getMdiIcon(wikiIconName: string | null | undefined): string|null {

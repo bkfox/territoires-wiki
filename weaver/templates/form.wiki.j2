@@ -10,6 +10,7 @@
     {%- elif property.property.type == "Page" %}
         |input type=combobox
         {%- if property.target_category -%}
+            |property={{ property.name -}}
             |values from category={{ property.target_category }}
         {%- endif %}
     {%- elif property.property.type == "Geographic coordinate" -%}

@@ -1,0 +1,15 @@
+{
+	"name": "mediawiki/custom-invite",
+	"type": "mediawiki-extension",
+	"description": "Allows account creation via a secure JWT invitation link.",
+	"license": "GPL-2.0-or-later",
+	"require": {
+		"php": ">=7.4.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"MediaWiki\\Extension\\CustomInvite\\": "src/"
+		}
+	}
+}
+

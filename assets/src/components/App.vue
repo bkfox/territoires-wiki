@@ -26,8 +26,7 @@
                 <app-create-menu :user="context.user" />
                 <wiki-portlets-menu nav :portlets="notificationsPortlets"
                     icon="mdi-bell" title="Notifications" />
-                <wiki-portlets-menu nav :portlets="userPortlets"
-                    icon="mdi-account" title="User Account" />
+                <app-user-menu :portlets="userPortlets" :user="context.user" />
                 <app-settings-menu />
             </template>
         </v-app-bar>
@@ -80,6 +79,7 @@ import {useAutoLocate} from '@/composables/useGeolocation'
 import AppToc from './AppToc.vue'
 import AppCreateMenu from './AppCreateMenu.vue'
 import AppSettingsMenu from './AppSettingsMenu.vue'
+import AppUserMenu from './AppUserMenu.vue'
 import AppSidebar from './AppSidebar.vue'
 
 import WikiPortletsMenu from './WikiPortletsMenu.vue'

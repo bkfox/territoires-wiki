@@ -265,6 +265,15 @@ a .v-list-item-subtitle {
     color: rgb(var(--v-theme-on-background));
 }
 
+*:not(.v-field__input) {
+    > input, > textarea {
+        border: solid 1px;
+        border-color: color-mix(in srgb, currentColor, rgb(255, 255, 255) calc((1 - 0.38) * 100%));
+        padding: 0.2rem;
+        margin: 0.2rem;
+    }
+}
+
 
 /** Custom classes **/
 .tw-grid {

@@ -10,12 +10,16 @@
                 :title="title || label || ''"/>
         </template>
         <v-list v-bind="listProps" nav>
-            <wiki-portlets-list :portlets="portlets" v-bind="attrs" />
+            <wiki-portlets-list :portlets="portlets" v-bind="attrs">
+                <template v-if="slots.append" #append="bound">
+                    <slot name="append" v-bind="bound"/>
+                </template>
+            </wiki-portlets-list>
         </v-list>
     </v-menu>
 </template>
 <script setup>
-import { computed, useAttrs } from 'vue'
+import { computed, useAttrs, useSlots } from 'vue'
 
 import WikiPortletsList from './WikiPortletsList.vue'
 
@@ -28,6 +32,7 @@ const {icon, title, label, portlets, variant, ...listProps} = defineProps({
     color: {type: String, default: 'primary'},
     portlets: Object,
 })
+const slots = useSlots()
 
 const isEmpty = computed(() => !portlets?.filter(p => p.items?.length).length)
 </script>

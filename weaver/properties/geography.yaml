@@ -17,6 +17,13 @@ properties:
         required: false
         multiple: false
 
+#    geometry:
+#        type: Text
+#        label: Géométrie
+#        description: Géométrie géographique de l'élément, notamment pour les lignes et les polygones.
+#        required: false
+#        multiple: false
+
     address:
         type: Text
         label: Adresse

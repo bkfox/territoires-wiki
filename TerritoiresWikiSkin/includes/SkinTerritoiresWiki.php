@@ -53,6 +53,8 @@ class ContextBuilder {
             "permissions" => [
                 "createPage" => $canEdit && $user->isAllowed("createpage"),
                 "edit" => $canEdit,
+                "invitesignup" => $user->isAllowed("invitesignup"),
+                "invitelink" => $user->isAllowed("invitelink"),
             ]
         ];
     }

@@ -52,6 +52,7 @@ function reset() {
                 <v-spacer/>
                 <v-btn text="Cancel" @click="reset()" />
                 <v-btn text="Create" color="primary"
+                    :disabled="!title"
                     @click="createPage()"
                 />
             </v-card-actions>
