@@ -28,7 +28,6 @@ const props = defineProps({
     noIcon: {type: Boolean},
 })
 const slots = useSlots()
-console.log(slots, !!slots.append)
 
 const lastIds = new Set(['pt-logout'])
 const lastItems = computed(() => {

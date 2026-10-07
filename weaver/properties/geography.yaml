@@ -17,6 +17,9 @@ properties:
         required: false
         multiple: false
 
+        input:
+            type: handled
+
 #    geometry:
 #        type: Text
 #        label: Géométrie
@@ -30,6 +33,11 @@ properties:
         description: Adresse postale ou localisation textuelle.
         required: false
         multiple: false
+
+        input:
+            type: place
+            parameters:
+                coordinates: coordinates
 
     country:
         type: Page

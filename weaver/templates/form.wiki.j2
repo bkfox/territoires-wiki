@@ -1,26 +1,4 @@
-{% macro field(property) -%}
-    {{ '{{{' }}field|{{ property.name -}}
-    |label={{ property.label -}}
-    {%- if property.enumeration -%}
-        |input type=dropdown|values=
-        {%- for key, value in property.enumeration.values.items() -%}
-            {{ key }}={{ value.label -}}
-            {%- if not loop.last -%};{% endif %}
-        {%- endfor %}
-    {%- elif property.property.type == "Page" %}
-        |input type=combobox
-        {%- if property.target_category -%}
-            |property={{ property.name -}}
-            |values from category={{ property.target_category }}
-        {%- endif %}
-    {%- elif property.property.type == "Geographic coordinate" -%}
-        |input type=leaflet
-    {%- endif %}
-    {%- if property.property.required %}|mandatory{% endif %}
-    {%- if property.property.multiple %}|list{% endif %}
-    {{- '}}}' }}
-{%- endmacro %}
-
+{% import "weaver/macros.j2" as weaver %}
 <noinclude>
 Ceci est le formulaire « {{ model.label }} »{% if model.description %}({{ model.description }}){% endif %}.
 
@@ -43,7 +21,7 @@ si une page existe déjà sous ce nom, vous serez dirigé vers un formulaire pou
 {% for property in group.properties %}
 |-
 ! {{ property.label }}:
-| {{ field(property) }}
+| {{ weaver.pf_field(property) }}
 {% endfor %}
 |}
 

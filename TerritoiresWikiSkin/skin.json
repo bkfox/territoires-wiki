@@ -1,50 +1,58 @@
 {
-  "name": "TerritoiresWikiSkin",
-  "author": "Thomas",
-  "description": "Territoires.wiki skin",
-  "manifest_version": 2,
-  "ValidSkinNames": {
-    "territoireswikiskin": {
-        "class": "SkinTerritoiresWiki",
-        "args": [{
-            "name": "TerritoiresWikiSkin",
-            "templateDirectory": "templates",
-            "toc": false
-        }]
+    "name": "TerritoiresWikiSkin",
+    "author": "Thomas",
+    "description": "Territoires.wiki skin",
+    "manifest_version": 2,
+    "ValidSkinNames": {
+        "territoireswikiskin": {
+            "class": "SkinTerritoiresWiki",
+            "args": [{
+                "name": "TerritoiresWikiSkin",
+                "templateDirectory": "templates",
+                "toc": false
+            }]
+        }
+    },
+    "AutoloadClasses": {
+        "SkinTerritoiresWiki": "includes/SkinTerritoiresWiki.php",
+        "MediaWiki\\Skins\\Territoires\\Hooks": "includes/Hooks.php",
+        "PFHandledInput": "includes/PFHandledInput.php",
+        "PFPlaceInput": "includes/PFPlaceInput.php",
+        "PFPlaceAddressInput": "includes/PFPlaceAddressInput.php",
+        "PFPlaceCoordinatesInput": "includes/PFPlaceCoordinatesInput.php"
+    },
+    "ResourceModules": {
+      "skins.territoireswiki.assets": {
+          "localBasePath": "",
+          "remoteSkinPath": "TerritoiresWikiSkin",
+          "scripts": [
+              "assets/index.js"
+          ],
+          "styles": [
+              "assets/index.css"
+          ],
+          "dependencies": [
+              "mediawiki.api",
+              "mediawiki.util",
+              "mediawiki.jqueryMsg"
+          ],
+          "targets": [ "desktop", "mobile" ]
+      }
+    },
+    "ResourceModuleSkinStyles": {
+        "territoireswiki": {
+            "skins.territoireswiki.assets": []
+        }
+    },
+    "VisualEditorSkinConfig": {
+      "territoireswiki": {
+        "mw-content-container": "#content",
+        "mw-body-content": "#bodyContent",
+        "mw-first-heading": "#firstHeading"
+      }
+    },
+    "Hooks": {
+        "PageForms::FormPrinterSetup": "MediaWiki\\Skins\\Territoires\\Hooks::onPageFormsFormPrinterSetup"
     }
-  },
-  "AutoloadClasses": {
-    "SkinTerritoiresWiki": "includes/SkinTerritoiresWiki.php"
-  },
-  "ResourceModules": {
-    "skins.territoireswiki.assets": {
-      "localBasePath": "",
-      "remoteSkinPath": "TerritoiresWikiSkin",
-      "scripts": [
-        "assets/index.js"
-      ],
-      "styles": [
-        "assets/index.css"
-      ],
-      "dependencies": [
-        "mediawiki.api",
-        "mediawiki.util",
-        "mediawiki.jqueryMsg"
-      ],
-      "targets": [ "desktop", "mobile" ]
-    }
-  },
-  "ResourceModuleSkinStyles": {
-    "territoireswiki": {
-      "skins.territoireswiki.assets": []
-    }
-  },
-  "VisualEditorSkinConfig": {
-    "territoireswiki": {
-      "mw-content-container": "#content",
-      "mw-body-content": "#bodyContent",
-      "mw-first-heading": "#firstHeading"
-    }
-  }
 }
 

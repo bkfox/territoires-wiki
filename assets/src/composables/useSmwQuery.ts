@@ -1,8 +1,10 @@
 import { ref, type Ref, } from "vue"
 
-import { SmwResult, } from "@/smw/result"
-import type { Coordinates, CoordinatesSource, SmwFilter, SmwNearby, SmwQueryOptions,
+import type { CoordinatesSource, SmwFilter, SmwNearby, SmwQueryOptions,
 } from "@/types/smw"
+import type { Coordinates } from '@/types/geo'
+import { SmwResult } from "@/smw/result"
+import { parseCoordinates } from '@/smw/geo'
 import {fetchExtracts} from './pages'
 
 
@@ -254,7 +256,7 @@ function extractCoordinates( properties: Record<string, unknown[]>, source?: Coo
         return undefined
 
     if (typeof source === "string")
-        return parseCoordinate( properties[source]?.[0], )
+        return parseCoordinates( properties[source]?.[0], )
 
     const latitude = toNumber( properties[source[0]]?.[0], )
     const longitude = toNumber( properties[source[1]]?.[0], )
@@ -263,28 +265,6 @@ function extractCoordinates( properties: Record<string, unknown[]>, source?: Coo
         return undefined
 
     return [latitude, longitude]
-}
-
-
-function parseCoordinate( value: unknown, ): Coordinates | undefined {
-    if (value?.lat !== undefined && value?.lon !== undefined)
-        return [value.lat, value.lon]
-    
-    if (typeof value !== "string")
-        return undefined
-
-    const [lat, lon] = value.split(",").map( (part) => Number(part.trim()), )
-
-    if ( !Number.isFinite(lat) || !Number.isFinite(lon) )
-        return undefined
-
-    return [lat, lon]
-}
-
-
-function toNumber( value: unknown, ): number | undefined {
-    const number = typeof value === "number" ? value : Number(value)
-    return Number.isFinite(number) ? number : undefined
 }
 
 

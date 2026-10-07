@@ -1,9 +1,33 @@
+import type { Coordinates } from '@/types/geo'
 import type { Coordinates, SmwBounds } from "@/types/smw"
 
 
 const EARTH_RADIUS_KM = 6371
 
 
+export function parseCoordinates( value: unknown, ): Coordinates | undefined {
+    if (value?.lat !== undefined && value?.lon !== undefined)
+        return [value.lat, value.lon]
+    
+    if (typeof value !== "string")
+        return undefined
+
+    const [lat, lon] = value.split(",").map( (part) => Number(part.trim()), )
+
+    if ( !Number.isFinite(lat) || !Number.isFinite(lon) )
+        return undefined
+
+    return [lat, lon]
+}
+
+
+function toNumber( value: unknown, ): number | undefined {
+    const number = typeof value === "number" ? value : Number(value)
+    return Number.isFinite(number) ? number : undefined
+}
+
+
+// ---- Computations
 export function latitudeDegreesForDistance(distanceKm: number): number {
     return distanceKm / EARTH_RADIUS_KM * 180 / Math.PI
 }

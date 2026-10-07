@@ -1,17 +1,5 @@
 import type { MapIconMapping } from '@/types/map'
 
-export interface Coordinates {
-    latitude: number
-    longitude: number
-}
-
-/**
- * One SMW geographic-coordinate property,
- * or two numeric properties containing latitude and longitude.
- */
-export type CoordinatesSource =
-    | string
-    | readonly [latitudeProperty: string, longitudeProperty: string]
 
 export type SmwFilterOperator = string
 

@@ -255,6 +255,21 @@ article img {
     content-visibility: visible !important;
 }
 
+.formtable {
+    min-width: 30rem;
+
+    tr {
+        &:has(td .pf-handled-input) { display: none }
+
+        td:last-child {
+            min-width: 30rem;
+        }
+    }
+
+
+}
+
+
 .v-list-subheader {
     border-bottom: rgb(var(--v-theme-primary)) 1px dashed;
     color: rgb(var(--v-theme-primary)) !important;

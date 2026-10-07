@@ -4,11 +4,15 @@ import ContentMap from './components/ContentMap.vue'
 import ContentList from './components/ContentList.vue'
 import ModelList from './components/ModelList.vue'
 import SmwQuery from './components/SmwQuery.vue'
+import PlaceInput from './components/PlaceInput.vue'
+import PlaceSearch from './components/PlaceSearch.vue'
+import CoordinateInput from './components/CoordinateInput.vue'
 
 
 /** Widgets registry mapping name to components **/
 export const widgetsRegistry = {
-    SmwQuery, ContentMap, ContentList, ModelList
+    SmwQuery, ContentMap, ContentList, ModelList, PlaceInput,
+    PlaceSearch, CoordinateInput,
 }
 
 
